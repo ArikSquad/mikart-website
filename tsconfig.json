@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "ES2017",
         "lib": ["dom", "dom.iterable", "esnext"],
         "baseUrl": ".",
         "allowJs": true,
@@ -22,8 +22,10 @@
         ],
         "paths": {
             "@/*": ["./*"],
+            "~/*": ["./*"],
             "contentlayer/generated": ["./.contentlayer/generated"],
-            "@payload-config": ["./payload.config.ts"]
+            "@payload-config": ["./payload.config.ts"],
+            "fumadocs-mdx/collections/*": [".source/*"]
         }
     },
     "include": [

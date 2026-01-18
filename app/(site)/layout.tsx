@@ -1,23 +1,24 @@
-import { Inter as FontSans } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 
 import '@/styles/globals.css'
-import { cn } from '@/lib/utils'
-import { ThemeProvider } from '@/components/theme-provider'
+import {ThemeProvider} from '@/components/theme-provider'
 import React from 'react'
-import { Toaster } from '@/components/ui/toaster'
-import type { Viewport } from 'next'
+import {Toaster} from '@/components/ui/toaster'
+import type {Viewport} from 'next'
+import {ClerkProvider} from "@clerk/nextjs";
+import ConvexClientProvider from "@/app/ConvexClientProvider";
 
-const fontSans = FontSans({
-    subsets: ['latin'],
-    variable: '--font-sans'
-})
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-sans'});
 
-// Font files can be colocated inside `pages`
-const fontHeading = localFont({
-    src: '../../assets/fonts/CalSans-SemiBold.woff2',
-    variable: '--font-heading'
-})
+const geistSans = Geist({
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
 
 interface RootLayoutProps {
     children: React.ReactNode
@@ -25,8 +26,8 @@ interface RootLayoutProps {
 
 export const viewport: Viewport = {
     themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' }
+        {media: '(prefers-color-scheme: light)', color: 'white'},
+        {media: '(prefers-color-scheme: dark)', color: 'black'}
     ]
 }
 
@@ -70,22 +71,22 @@ export const metadata = {
     manifest: `https://www.mikart.eu/site.webmanifest`
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({children}: RootLayoutProps) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body
-                className={cn(
-                    'min-h-screen bg-background font-sans antialiased',
-                    fontSans.variable,
-                    fontHeading.variable
-                )}
-            >
-                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
+        <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ClerkProvider>
+                <ConvexClientProvider>
                     {children}
 
-                    <Toaster />
-                </ThemeProvider>
-            </body>
+                    <Toaster/>
+                </ConvexClientProvider>
+            </ClerkProvider>
+        </ThemeProvider>
+        </body>
         </html>
     )
 }

@@ -6,10 +6,15 @@ import { useSelectedLayoutSegment } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
-import { MainNavItem } from '@/types'
 import { cn } from '@/lib/utils'
 import { MobileNav } from './mobile-nav'
 import { Button } from '@/components/ui/button'
+
+type MainNavItem = {
+    title: string
+    href: string
+    disabled?: boolean
+}
 
 interface MainNavProps {
     items?: MainNavItem[]

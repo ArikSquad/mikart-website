@@ -16,8 +16,9 @@ import {
     ItemSeparator,
     ItemTitle
 } from '@/components/ui/item'
+import {Metadata} from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'ArikSquad | Portfolio'
 }
 
