@@ -75,7 +75,7 @@ export default function PostPage() {
 
     return (
         <article className="relative">
-            <div className="container max-w-4xl">
+            <div className="mx-auto max-w-7xl px-4 max-w-4xl">
                 <div className="pt-8 pb-4">
                     <Link
                         href="/blog"
@@ -175,7 +175,7 @@ export default function PostPage() {
 function PostPageSkeleton() {
     return (
         <article className="relative">
-            <div className="container max-w-4xl">
+            <div className="mx-auto max-w-7xl px-4 max-w-4xl">
                 <div className="pt-8 pb-4">
                     <Skeleton className="h-10 w-32 mb-6" />
                     <div className="space-y-4">

@@ -66,7 +66,7 @@ export default function AdminPage() {
 
     if (authLoading) {
         return (
-            <div className="container py-10">
+            <div className="mx-auto max-w-7xl px-4 py-10">
                 <div className="space-y-6">
                     <Skeleton className="h-10 w-48" />
                     <Skeleton className="h-[400px] w-full" />
@@ -77,7 +77,7 @@ export default function AdminPage() {
 
     if (!isAuthenticated) {
         return (
-            <div className="container py-10">
+            <div className="mx-auto max-w-7xl px-4 py-10">
                 <Card className="max-w-md mx-auto">
                     <CardHeader className="text-center">
                         <CardTitle>Admin Panel</CardTitle>
@@ -134,7 +134,7 @@ export default function AdminPage() {
     const draftCount = posts?.filter((p) => !p.isPublished).length || 0
 
     return (
-        <div className="container py-10">
+        <div className="mx-auto max-w-7xl px-4 py-10">
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Admin Panel</h1>

@@ -3,7 +3,7 @@ import Link, { type LinkProps } from 'next/link'
 
 export default function DocsPage() {
     return (
-        <main className="container flex flex-col flex-1 justify-center items-center py-16 text-center z-2">
+        <main className="mx-auto max-w-7xl px-4 flex flex-col flex-1 justify-center items-center py-16 text-center z-2">
             <h1 className="mb-4 text-3xl font-semibold md:text-4xl">Getting Started</h1>
             <p className="text-fd-muted-foreground">Portal to different sections of docs.</p>
             <div className="mt-8 grid grid-cols-1 gap-4 text-start md:grid-cols-2">

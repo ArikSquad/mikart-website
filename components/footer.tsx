@@ -109,7 +109,7 @@ export default function Footer() {
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
             <div className="relative">
-                <div className="container mx-auto px-6 py-16">
+                <div className="mx-auto max-w-7xl px-4 mx-auto px-6 py-16">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <Link href="/" className="inline-block mb-6">
@@ -192,7 +192,7 @@ export default function Footer() {
 
                 <Separator />
 
-                <div className="container mx-auto px-6 py-6">
+                <div className="mx-auto max-w-7xl px-4 mx-auto px-6 py-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div className="text-sm text-muted-foreground">
                             © {new Date().getFullYear()} MikArt Europe. All rights reserved.
