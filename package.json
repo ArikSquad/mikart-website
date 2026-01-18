@@ -61,7 +61,7 @@
         "eslint-config-next": "16.0.1",
         "framer-motion": "^12.26.2",
         "fumadocs-core": "^16.4.7",
-        "fumadocs-mdx": "^13.0.8",
+        "fumadocs-mdx": "^14.2.5",
         "fumadocs-ui": "^16.4.7",
         "groq": "^4.22.0",
         "input-otp": "^1.4.2",
