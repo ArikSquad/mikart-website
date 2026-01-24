@@ -15,11 +15,6 @@ const config = {
                 protocol: 'https',
                 hostname: 'raw.githubusercontent.com',
                 pathname: '**'
-            },
-            {
-                protocol: 'https',
-                hostname: 'cdn.sanity.io',
-                pathname: '**'
             }
         ]
     },
@@ -33,7 +28,10 @@ const config = {
         { source: '/flow/discord', destination: 'https://discord.gg/SuXGbq24wA', permanent: true },
         { source: '/flow/earth', destination: 'https://earth.mikart.eu/', permanent: true },
         { source: '/flow/store', destination: 'https://store.mikart.eu/', permanent: true }
-    ]
+    ],
+    experimental: {
+        globalNotFound: true
+    }
 }
 
 export default withMDX(config)

@@ -3,10 +3,15 @@ import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import Image from 'next/image'
 
-import { MainNavItem } from '@/types'
 import { cn } from '@/lib/utils'
 import { useLockBody } from '@/components/hooks/use-lock-body'
 import { Separator } from '@/components/ui/separator'
+
+type MainNavItem = {
+    title: string
+    href: string
+    disabled?: boolean
+}
 
 interface MobileNavProps {
     items: MainNavItem[]

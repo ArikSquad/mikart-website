@@ -98,7 +98,7 @@ const contactInfo = [
     },
     {
         icon: Clock,
-        text: 'UTC+3',
+        text: 'UTC+2',
         link: null
     }
 ]
@@ -106,10 +106,10 @@ const contactInfo = [
 export default function Footer() {
     return (
         <footer className="relative bg-background border-t">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
             <div className="relative">
-                <div className="container mx-auto px-6 py-16">
+                <div className="mx-auto max-w-7xl px-4 mx-auto px-6 py-16">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <Link href="/" className="inline-block mb-6">
@@ -123,14 +123,14 @@ export default function Footer() {
                             </Link>
 
                             <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
-                                MikArt Europe is your premier destination for innovative Minecraft modifications, tools,
-                                and security solutions. Building the future of gaming experiences.
+                                MikArt Europe is your premier destination for innovative software, tools and services.
+                                Building the future of technology, one line of code at a time.
                             </p>
 
                             <div className="space-y-3">
                                 {contactInfo.map((item, index) => (
                                     <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
-                                        <item.icon className="h-4 w-4 flex-shrink-0" />
+                                        <item.icon className="h-4 w-4 shrink-0" />
                                         {item.link ? (
                                             <Link href={item.link} className="hover:text-foreground transition-colors">
                                                 {item.text}
@@ -192,7 +192,7 @@ export default function Footer() {
 
                 <Separator />
 
-                <div className="container mx-auto px-6 py-6">
+                <div className="mx-auto max-w-7xl px-4 mx-auto px-6 py-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div className="text-sm text-muted-foreground">
                             © {new Date().getFullYear()} MikArt Europe. All rights reserved.

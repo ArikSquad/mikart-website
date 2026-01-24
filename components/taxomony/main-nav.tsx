@@ -6,10 +6,15 @@ import { useSelectedLayoutSegment } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
-import { MainNavItem } from '@/types'
 import { cn } from '@/lib/utils'
 import { MobileNav } from './mobile-nav'
 import { Button } from '@/components/ui/button'
+
+type MainNavItem = {
+    title: string
+    href: string
+    disabled?: boolean
+}
 
 interface MainNavProps {
     items?: MainNavItem[]
@@ -40,7 +45,7 @@ export function MainNav({ items, children, showLogo = true, className }: MainNav
                         />
                         <div className="absolute inset-0 rounded-lg bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                    <span className="hidden sm:block font-bold text-lg bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                    <span className="hidden sm:block font-bold text-lg bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                         MikArt
                     </span>
                 </Link>

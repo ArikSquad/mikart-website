@@ -16,8 +16,9 @@ import {
     ItemSeparator,
     ItemTitle
 } from '@/components/ui/item'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'ArikSquad | Portfolio'
 }
 
@@ -68,7 +69,7 @@ export default function Page() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-background to-muted/40">
             <div className="relative z-10 flex min-h-screen flex-col justify-between">
-                <main className="container mx-auto px-4 py-12 md:py-20">
+                <main className="mx-auto max-w-7xl px-4 mx-auto px-4 py-12 md:py-20">
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
                         <div className="lg:col-span-5 lg:sticky lg:top-10 lg:self-start">
                             <div className="space-y-8">

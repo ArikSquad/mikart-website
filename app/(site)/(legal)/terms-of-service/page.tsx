@@ -1,36 +1,70 @@
 import React from 'react'
 import { Separator } from '@/components/ui/separator'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Terms of Service'
 }
 
 export default function TermsPage() {
     return (
-        <div className="container mx-auto p-8 my-4">
+        <div className="mx-auto max-w-7xl px-4 mx-auto p-8 my-4">
             <h1 className="text-4xl font-extrabold mb-6">Terms & Conditions</h1>
-            <p className="text-lg leading-relaxed mb-4">Last updated: July 18, 2024</p>
+            <p className="text-lg leading-relaxed mb-4">Last updated: January 18, 2026</p>
             <p className="text-lg leading-relaxed mb-4">
-                These Terms of Service (&#34;Terms&#34;) govern your use of the EnSave Discord bot (&#34;Bot&#34;),
-                provided by EnSave (&#34;Company&#34;, &#34;we&#34;, &#34;us&#34;, or &#34;our&#34;). By accessing or
-                using the Bot, you agree to be bound by these Terms. If you disagree with any part of the terms, then
-                you do not have permission to access the Bot.
+                Welcome to MikArt Europe. By accessing or using our website and services, you agree to be bound by these
+                Terms of Service.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 mt-8">Use License</h2>
-            <Separator className="mb-6" />
-            <p className="text-lg leading-relaxed mb-4">
-                1. Permission is granted to temporarily download one copy of the Bot for personal, non-commercial
-                transitory viewing only. This is the grant of a license, not a transfer of title, and under this
-                license, you may not:
-            </p>
             <section className="mb-8">
-                <h2 className="text-2xl font-semibold mb-4">General</h2>
-                <p className="text-lg leading-relaxed">placeholder</p>
+                <h2 className="text-2xl font-semibold mb-4">Use of Service</h2>
+                <Separator className="mb-6" />
+                <p className="text-lg leading-relaxed mb-4">
+                    You agree to use our website and services only for lawful purposes and in accordance with these
+                    Terms. You may not use the services in any way that could damage, disable, overburden, or impair our
+                    platform.
+                </p>
             </section>
+
+            <section className="mb-8">
+                <h2 className="text-2xl font-semibold mb-4">Intellectual Property</h2>
+                <Separator className="mb-6" />
+                <p className="text-lg leading-relaxed mb-4">
+                    All content, graphics, logos, and materials on this website are the property of MikArt Europe or its
+                    licensors and are protected by copyright laws. You may not reproduce, distribute, or create
+                    derivative works without explicit permission.
+                </p>
+            </section>
+
             <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">Disclaimer</h2>
-                <p className="text-lg leading-relaxed">placeholder</p>
+                <Separator className="mb-6" />
+                <p className="text-lg leading-relaxed mb-4">
+                    MikArt Europe provides its services "as is" and makes no warranties regarding the accuracy,
+                    reliability, or availability of the website. We are not liable for any damages arising from your use
+                    of our services.
+                </p>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="text-2xl font-semibold mb-4">Changes to Terms</h2>
+                <Separator className="mb-6" />
+                <p className="text-lg leading-relaxed mb-4">
+                    We may update these Terms from time to time. Continued use of our services constitutes acceptance of
+                    the updated Terms.
+                </p>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+                <Separator className="mb-6" />
+                <p className="text-lg leading-relaxed mb-4">
+                    If you have questions about these Terms, please contact us at{' '}
+                    <a href="mailto:admin@mikart.eu" className="text-blue-600 underline">
+                        admin@mikart.eu
+                    </a>
+                    .
+                </p>
             </section>
         </div>
     )

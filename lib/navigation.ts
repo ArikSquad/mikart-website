@@ -1,6 +1,4 @@
-import { MainNavItem } from '@/types'
-
-export const mainNavItems: MainNavItem[] = [
+export const mainNavItems = [
     {
         title: 'Home',
         href: '/'
@@ -12,24 +10,5 @@ export const mainNavItems: MainNavItem[] = [
     {
         title: 'Blog',
         href: '/blog'
-    }
-]
-
-export const docsNavItems: MainNavItem[] = [
-    {
-        title: 'Getting Started',
-        href: '/docs'
-    },
-    {
-        title: 'AnimVanish',
-        href: '/docs/animvanish'
-    },
-    {
-        title: 'GroupSecurity',
-        href: '/docs/gs'
-    },
-    {
-        title: 'Panoptic',
-        href: '/docs/panoptic'
     }
 ]
