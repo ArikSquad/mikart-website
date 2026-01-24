@@ -68,6 +68,7 @@ export const getBySlugWithAuthor = query({
 export const create = mutation({
     args: {
         title: v.string(),
+        description: v.optional(v.string()),
         content: v.any(),
         tags: v.optional(v.array(v.string())),
         slug: v.string(),
@@ -93,6 +94,7 @@ export const create = mutation({
         const now = Date.now()
         return await ctx.db.insert('posts', {
             title: args.title,
+            description: args.description,
             content: args.content,
             tags: args.tags,
             slug: args.slug,
@@ -109,6 +111,7 @@ export const update = mutation({
     args: {
         id: v.id('posts'),
         title: v.optional(v.string()),
+        description: v.optional(v.string()),
         content: v.optional(v.any()),
         tags: v.optional(v.array(v.string())),
         slug: v.optional(v.string()),
@@ -122,11 +125,6 @@ export const update = mutation({
         if (!existing) {
             throw new Error('Post not found')
         }
-
-        const user = await ctx.db
-            .query('users')
-            .withIndex('by_clerkId', (q) => q.eq('clerkId', requesterId))
-            .first()
 
         const identity = await ctx.auth.getUserIdentity()
         if (identity === null) {

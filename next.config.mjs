@@ -30,8 +30,8 @@ const config = {
         { source: '/flow/store', destination: 'https://store.mikart.eu/', permanent: true }
     ],
     experimental: {
-        globalNotFound: true,
-    },
+        globalNotFound: true
+    }
 }
 
 export default withMDX(config)

@@ -48,6 +48,7 @@ interface PostEditorProps {
     initialData?: {
         _id?: string
         title: string
+        description?: string
         content: any
         tags?: string[]
         slug: string
@@ -56,6 +57,7 @@ interface PostEditorProps {
     }
     onSave: (data: {
         title: string
+        description?: string
         content: any
         tags?: string[]
         slug: string
@@ -67,6 +69,7 @@ interface PostEditorProps {
 
 export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
     const [title, setTitle] = useState(initialData?.title || '')
+    const [desc, setDesc] = useState(initialData?.description || '')
     const [slug, setSlug] = useState(initialData?.slug || '')
     const [tags, setTags] = useState<string[]>(initialData?.tags || [])
     const [tagInput, setTagInput] = useState('')
@@ -116,7 +119,6 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
         content: initialData?.content || { type: 'doc', content: [{ type: 'paragraph' }] }
     })
 
-    // Auto-generate slug from title
     useEffect(() => {
         if (!initialData?._id && title) {
             const generatedSlug = title
@@ -150,6 +152,7 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
         try {
             await onSave({
                 title,
+                description: desc,
                 content: editor?.getJSON() || { type: 'doc', content: [] },
                 tags: tags.length > 0 ? tags : undefined,
                 slug,
@@ -168,7 +171,6 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
 
     return (
         <div className="flex flex-col h-[85vh]">
-            {/* Header */}
             <div className="flex items-center justify-between pb-4 border-b">
                 <div className="flex items-center gap-3">
                     <h2 className="text-lg font-semibold">{initialData?._id ? 'Edit Post' : 'New Post'}</h2>
@@ -221,13 +223,19 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
             <div className="flex-1 flex gap-6 pt-4 overflow-hidden">
                 <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                     <Input
-                        placeholder="Post title..."
+                        placeholder="Post Title..."
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="text-2xl font-semibold border-0 border-b rounded-none px-0 focus-visible:ring-0 focus-visible:border-primary h-auto py-3 mb-4"
+                        className="w-full text-lg font-medium border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 mb-4"
                     />
 
-                    {/* Editor */}
+                    <Input
+                        placeholder="Lead paragraph..."
+                        value={desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                        className="w-full text-lg font-medium border  rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 mb-4"
+                    />
+
                     <div className="flex-1 overflow-hidden border rounded-lg bg-background">
                         <EditorContext.Provider value={{ editor }}>
                             <Toolbar ref={toolbarRef} className="sticky top-0 z-10 border-b bg-muted/30 px-2">
@@ -275,9 +283,7 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
                     </div>
                 </div>
 
-                {/* Sidebar */}
                 <div className="w-72 shrink-0 overflow-y-auto space-y-4">
-                    {/* Slug */}
                     <div className="space-y-2">
                         <Label htmlFor="slug" className="text-sm font-medium flex items-center gap-2">
                             <Link2 className="h-4 w-4 text-muted-foreground" />
@@ -293,7 +299,6 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
                         <p className="text-xs text-muted-foreground">/blog/{slug || 'your-post-slug'}</p>
                     </div>
 
-                    {/* Tags */}
                     <div className="space-y-2">
                         <Label htmlFor="tags" className="text-sm font-medium flex items-center gap-2">
                             <Tag className="h-4 w-4 text-muted-foreground" />
@@ -335,7 +340,6 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
                         )}
                     </div>
 
-                    {/* Advanced Options */}
                     <Collapsible open={isMetadataOpen} onOpenChange={setIsMetadataOpen}>
                         <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="w-full justify-between text-sm font-medium">

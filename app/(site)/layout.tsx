@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/sonner'
 import type { Metadata, Viewport } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/app/ConvexClientProvider'
-import {metadata as m} from "@/types/metadata";
+import { metadata as m } from '@/types/metadata'
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
     ]
 }
 
-export const metadata: Metadata = m;
+export const metadata: Metadata = m
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (

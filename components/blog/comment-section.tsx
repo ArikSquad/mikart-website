@@ -114,7 +114,6 @@ export function CommentSection({ postId, comments }: CommentSectionProps) {
 
     return (
         <div className="space-y-6">
-            {/* Header */}
             <div className="flex items-center gap-3 pb-4 border-b">
                 <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10">
                     <MessageCircle className="h-5 w-5 text-primary" />
@@ -393,7 +392,6 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                         </p>
                     )}
 
-                    {/* Reactions */}
                     {!isEditing && (
                         <div className="flex items-center gap-2 mt-3 flex-wrap">
                             {reactions &&
@@ -516,7 +514,6 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                         </div>
                     )}
 
-                    {/* Replies */}
                     {showReplies && comment.replies.length > 0 && (
                         <div className="mt-4 space-y-4 pl-4 border-l-2 border-muted">
                             {comment.replies.map((reply) => (
@@ -532,7 +529,6 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                 </div>
             </div>
 
-            {/* Delete Dialog */}
             <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
@@ -729,8 +725,6 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
                 ) : (
                     <>
                         <p className="text-sm mt-1 whitespace-pre-wrap text-foreground/90">{reply.content}</p>
-
-                        {/* Reactions */}
                         <div className="flex items-center gap-2 mt-2 flex-wrap">
                             {reactions &&
                                 reactions.map((reaction) => (

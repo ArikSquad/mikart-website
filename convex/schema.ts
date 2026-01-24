@@ -17,6 +17,7 @@ export default defineSchema({
 
     posts: defineTable({
         title: v.string(),
+        description: v.optional(v.string()),
         content: v.any(),
         tags: v.optional(v.array(v.string())),
         slug: v.string(),

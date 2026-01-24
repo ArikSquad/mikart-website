@@ -102,10 +102,7 @@ export default function NotFound() {
                             animate="visible"
                             className="relative z-10 flex flex-col items-center text-center px-6 max-w-2xl"
                         >
-                            <motion.div
-                                variants={itemVariants}
-                                className="relative mb-6"
-                            >
+                            <motion.div variants={itemVariants} className="relative mb-6">
                                 <motion.span
                                     variants={glitchVariants}
                                     animate="animate"
@@ -129,10 +126,7 @@ export default function NotFound() {
                                 </motion.span>
                             </motion.div>
 
-                            <motion.div
-                                variants={itemVariants}
-                                className="mb-6"
-                            >
+                            <motion.div variants={itemVariants} className="mb-6">
                                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/50 backdrop-blur-sm font-mono text-xs text-muted-foreground">
                                     <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" />
                                     ERROR_NOT_FOUND
@@ -150,24 +144,22 @@ export default function NotFound() {
                                 variants={itemVariants}
                                 className="text-muted-foreground text-base sm:text-lg mb-10 max-w-md font-mono"
                             >
-                                The page you&apos;re looking for doesn&apos;t exist or has been moved to another dimension.
+                                The page you&apos;re looking for doesn&apos;t exist or has been moved to another
+                                dimension.
                             </motion.p>
 
                             <motion.div
                                 variants={itemVariants}
                                 className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
                             >
-                                <Button
-                                    asChild
-                                    size="lg"
-                                    className="gap-2 font-mono"
-                                >
-                                    <Link href="/" onClick={
-                                        (e) => {
+                                <Button asChild size="lg" className="gap-2 font-mono">
+                                    <Link
+                                        href="/"
+                                        onClick={(e) => {
                                             e.preventDefault()
                                             window.location.href = '/'
-                                        }
-                                    }>
+                                        }}
+                                    >
                                         <Home className="size-4" />
                                         Back to home
                                     </Link>
@@ -179,28 +171,27 @@ export default function NotFound() {
                                     className="gap-2 font-mono"
                                     onClick={() => window.history.back()}
                                 >
-                                    <button type="button" onClick={() => {
-                                        window.history.back()
-                                        setTimeout(() => {
-                                            window.location.reload()
-                                        }, 100)
-                                    }}>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            window.history.back()
+                                            setTimeout(() => {
+                                                window.location.reload()
+                                            }, 100)
+                                        }}
+                                    >
                                         <ArrowLeft className="size-4" />
                                         Go back
                                     </button>
                                 </Button>
-                                <Button
-                                    asChild
-                                    variant="ghost"
-                                    size="lg"
-                                    className="gap-2 font-mono"
-                                >
-                                    <Link href="/docs" onClick={
-                                        (e) => {
+                                <Button asChild variant="ghost" size="lg" className="gap-2 font-mono">
+                                    <Link
+                                        href="/docs"
+                                        onClick={(e) => {
                                             e.preventDefault()
                                             window.location.href = '/docs'
-                                        }
-                                    }>
+                                        }}
+                                    >
                                         <Search className="size-4" />
                                         Visit docs
                                     </Link>
@@ -218,9 +209,14 @@ export default function NotFound() {
                                     <span className="ml-auto font-mono text-xs text-muted-foreground">terminal</span>
                                 </div>
                                 <div className="font-mono text-xs text-muted-foreground text-left space-y-1">
-                                    <p><span className="text-primary">$</span> curl -I {typeof window !== 'undefined' ? window.location.href : 'https://mikart.eu/...'}</p>
+                                    <p>
+                                        <span className="text-primary">$</span> curl -I{' '}
+                                        {typeof window !== 'undefined' ? window.location.href : 'https://mikart.eu/...'}
+                                    </p>
                                     <p className="text-destructive">HTTP/1.1 404 Not Found</p>
-                                    <p><span className="text-muted-foreground/60">→</span> Resource unavailable</p>
+                                    <p>
+                                        <span className="text-muted-foreground/60">→</span> Resource unavailable
+                                    </p>
                                     <motion.span
                                         animate={{ opacity: [1, 0, 1] }}
                                         transition={{ duration: 1, repeat: Infinity }}

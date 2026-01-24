@@ -106,7 +106,7 @@ export default function NewPostPage() {
                 </div>
 
                 <Card>
-                    <CardContent className="pt-6">
+                    <CardContent>
                         <PostEditor onSave={handleCreatePost} onCancel={handleCancel} />
                     </CardContent>
                 </Card>

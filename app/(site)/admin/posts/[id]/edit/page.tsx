@@ -116,7 +116,7 @@ export default function EditPostPage() {
                 </div>
 
                 <Card>
-                    <CardContent className="pt-6">
+                    <CardContent>
                         <PostEditor initialData={post} onSave={handleUpdatePost} onCancel={handleCancel} />
                     </CardContent>
                 </Card>

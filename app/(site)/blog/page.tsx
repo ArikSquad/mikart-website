@@ -75,7 +75,7 @@ function BlogCard({ post, featured = false }: { post: any; featured?: boolean })
             }`}
         >
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <CardContent className={`p-6 relative z-10 flex flex-col h-full ${featured ? 'md:p-8' : ''}`}>
+            <CardContent className={`relative z-10 flex flex-col h-full ${featured ? 'md:p-5' : ''}`}>
                 <div className="flex flex-wrap gap-2 mb-4">
                     {post.tags && post.tags.length > 0 && (
                         <>
@@ -104,6 +104,16 @@ function BlogCard({ post, featured = false }: { post: any; featured?: boolean })
                 >
                     {post.title}
                 </h2>
+
+                {post.description && (
+                    <p
+                        className={`text-muted-foreground mb-6 text-sm flex-1 ${
+                            featured ? 'text-lg line-clamp-3' : 'line-clamp-2'
+                        } font-mono`}
+                    >
+                        {post.description}
+                    </p>
+                )}
 
                 <div className="mt-auto pt-4 border-t border-border/50">
                     <div className="flex items-center justify-between">
@@ -158,16 +168,16 @@ export default function BlogPage() {
                         {posts.length > 0 && (
                             <div className="mb-12">
                                 <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-6">
-                                    Latest Post
+                                    Latest Posts
                                 </h2>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <BlogCard post={posts[0]} featured />
                                     {posts.length > 1 && (
-                                        <div className="grid gap-6">
+                                        <>
                                             {posts.slice(1, 3).map((post) => (
                                                 <BlogCard key={post._id} post={post} />
                                             ))}
-                                        </div>
+                                        </>
                                     )}
                                 </div>
                             </div>
