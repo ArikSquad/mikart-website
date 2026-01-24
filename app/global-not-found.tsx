@@ -167,7 +167,12 @@ export default function NotFound() {
                                     size="lg"
                                     className="gap-2 font-mono"
                                 >
-                                    <Link href="/">
+                                    <Link href="/" onClick={
+                                        (e) => {
+                                            e.preventDefault()
+                                            window.location.href = '/'
+                                        }
+                                    }>
                                         <Home className="size-4" />
                                         Back to home
                                     </Link>
@@ -179,7 +184,12 @@ export default function NotFound() {
                                     className="gap-2 font-mono"
                                     onClick={() => window.history.back()}
                                 >
-                                    <button type="button" onClick={() => window.history.back()}>
+                                    <button type="button" onClick={() => {
+                                        window.history.back()
+                                        setTimeout(() => {
+                                            window.location.reload()
+                                        }, 100)
+                                    }}>
                                         <ArrowLeft className="size-4" />
                                         Go back
                                     </button>
@@ -190,7 +200,12 @@ export default function NotFound() {
                                     size="lg"
                                     className="gap-2 font-mono"
                                 >
-                                    <Link href="/docs">
+                                    <Link href="/docs" onClick={
+                                        (e) => {
+                                            e.preventDefault()
+                                            window.location.href = '/docs'
+                                        }
+                                    }>
                                         <Search className="size-4" />
                                         Visit docs
                                     </Link>
