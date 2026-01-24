@@ -18,7 +18,6 @@ import { CommentSection } from '@/components/blog/comment-section'
 import { MainNav } from '@/components/taxomony/main-nav'
 import { mainNavItems } from '@/lib/navigation'
 import { Separator } from '@/components/ui/separator'
-
 import { toast } from 'sonner'
 
 function BlogHeader() {
@@ -96,7 +95,6 @@ export default function PostPage() {
                     title: post.title,
                     url
                 })
-                toast.success('Shared successfully!')
             } catch (err) {
                 if ((err as Error).name !== 'AbortError') {
                     await copyToClipboard(url)
@@ -110,9 +108,9 @@ export default function PostPage() {
     const copyToClipboard = async (text: string) => {
         try {
             await navigator.clipboard.writeText(text)
-            toast.success('Link copied to clipboard!')
+            toast('Link copied to clipboard')
         } catch (err) {
-            toast.error('Failed to copy link')
+            toast('Failed to copy link to clipboard')
         }
     }
 
@@ -120,7 +118,6 @@ export default function PostPage() {
         <div className="bg-background min-h-screen">
             <BlogHeader />
 
-            {/* Hero Section */}
             <div className="relative overflow-hidden border-b border-border/40">
                 <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary/10" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
@@ -151,7 +148,6 @@ export default function PostPage() {
                         </Alert>
                     )}
 
-                    {/* Tags */}
                     {post.tags && post.tags.length > 0 && (
                         <div className="flex flex-wrap gap-2 mb-6">
                             {post.tags.map((tag, index) => (
@@ -171,7 +167,6 @@ export default function PostPage() {
                     </h1>
 
                     <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-                        {/* Author */}
                         {author && (
                             <Link
                                 href={`/profile/${author.clerkId}`}
@@ -234,15 +229,13 @@ export default function PostPage() {
                 </div>
             </div>
 
-            {/* Content */}
             <article className="mx-auto max-w-4xl px-4 py-12">
-                <div className="prose prose-lg prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-heading prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-pre:bg-muted">
+                <div className="prose prose-lg prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-heading prose-headings:font-bold prose-a:text-primary prose-a:no-underline prose-img:rounded-xl">
                     <TiptapRenderer content={post.content} />
                 </div>
 
                 <Separator className="my-12" />
 
-                {/* Footer Navigation */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <Link href="/blog" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
                         <ChevronLeft className="mr-2 h-4 w-4" />

@@ -11,9 +11,7 @@ export const getByTarget = query({
     handler: async (ctx, args) => {
         const reactions = await ctx.db
             .query('reactions')
-            .withIndex('by_target', (q) =>
-                q.eq('targetType', args.targetType).eq('targetId', args.targetId)
-            )
+            .withIndex('by_target', (q) => q.eq('targetType', args.targetType).eq('targetId', args.targetId))
             .collect()
 
         const grouped: Record<string, { emoji: string; count: number; userIds: string[] }> = {}

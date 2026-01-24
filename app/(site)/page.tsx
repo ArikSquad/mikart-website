@@ -38,10 +38,17 @@ function Home() {
 
                     <div className="mx-auto max-w-7xl px-4 relative z-10">
                         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-                            <Badge variant="outline" className="px-4 py-2 text-sm bg-background/50 backdrop-blur-sm">
-                                <Zap className="h-4 w-4 mr-2" />
-                                Made with <span className="text-primary font-semibold mx-1">{currentMessage}</span> by
-                                ArikSquad
+                            <Badge
+                                variant="outline"
+                                className="flex items-center gap-2 px-4 py-4 text-sm rounded-xl
+             bg-background/60 backdrop-blur-md
+             border-border/60 shadow-sm"
+                            >
+                                <Zap className="h-4 w-4 text-primary drop-shadow" />
+                                <span className="tracking-tight">
+                                    Made with <span className="font-semibold text-primary">{currentMessage}</span>
+                                    <span className="ml-1">by ArikSquad</span>
+                                </span>
                             </Badge>
 
                             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
@@ -86,8 +93,8 @@ function Home() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <Card className="group flex flex-col hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
-                                <CardContent className="p-6 flex-1">
+                            <Card className="group flex flex-col hover:shadow-lg transition-all duration-300 border-2 rounded-lg hover:border-primary/20 overflow-hidden">
+                                <CardContent className="p-6">
                                     <div className="relative mb-6 rounded-lg overflow-hidden">
                                         <Image
                                             src="/assets/animvanish.png"
@@ -110,7 +117,7 @@ function Home() {
                                     </p>
                                 </CardContent>
 
-                                <CardFooter className="border-t bg-muted/30 px-6 py-4">
+                                <CardFooter>
                                     <div className="flex w-full items-center justify-between">
                                         <Badge variant="secondary" className="text-xs">
                                             Minecraft Plugin
@@ -147,7 +154,7 @@ function Home() {
                                     </p>
                                 </CardContent>
 
-                                <CardFooter className="border-t bg-muted/30 px-6 py-4">
+                                <CardFooter>
                                     <div className="flex w-full items-center justify-between">
                                         <Badge
                                             variant="secondary"
@@ -187,7 +194,7 @@ function Home() {
                                     </p>
                                 </CardContent>
 
-                                <CardFooter className="border-t bg-muted/30 px-6 py-4">
+                                <CardFooter>
                                     <div className="flex w-full items-center justify-between">
                                         <Badge
                                             variant="secondary"

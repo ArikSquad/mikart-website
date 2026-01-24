@@ -396,22 +396,24 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                     {/* Reactions */}
                     {!isEditing && (
                         <div className="flex items-center gap-2 mt-3 flex-wrap">
-                            {reactions && reactions.map((reaction) => (
-                                <Button
-                                    key={reaction.emoji}
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(
-                                        "h-7 px-2 text-xs gap-1",
-                                        reaction.userIds.includes(currentUserId || '') && "bg-primary/10 border-primary/30"
-                                    )}
-                                    onClick={() => handleReaction(reaction.emoji)}
-                                    disabled={!currentUserId}
-                                >
-                                    <span>{reaction.emoji}</span>
-                                    <span>{reaction.count}</span>
-                                </Button>
-                            ))}
+                            {reactions &&
+                                reactions.map((reaction) => (
+                                    <Button
+                                        key={reaction.emoji}
+                                        variant="outline"
+                                        size="sm"
+                                        className={cn(
+                                            'h-7 px-2 text-xs gap-1',
+                                            reaction.userIds.includes(currentUserId || '') &&
+                                                'bg-primary/10 border-primary/30'
+                                        )}
+                                        onClick={() => handleReaction(reaction.emoji)}
+                                        disabled={!currentUserId}
+                                    >
+                                        <span>{reaction.emoji}</span>
+                                        <span>{reaction.count}</span>
+                                    </Button>
+                                ))}
 
                             {isSignedIn && (
                                 <Popover>
@@ -730,22 +732,24 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
 
                         {/* Reactions */}
                         <div className="flex items-center gap-2 mt-2 flex-wrap">
-                            {reactions && reactions.map((reaction) => (
-                                <Button
-                                    key={reaction.emoji}
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(
-                                        "h-6 px-1.5 text-xs gap-1",
-                                        reaction.userIds.includes(currentUserId || '') && "bg-primary/10 border-primary/30"
-                                    )}
-                                    onClick={() => handleReaction(reaction.emoji)}
-                                    disabled={!currentUserId}
-                                >
-                                    <span>{reaction.emoji}</span>
-                                    <span>{reaction.count}</span>
-                                </Button>
-                            ))}
+                            {reactions &&
+                                reactions.map((reaction) => (
+                                    <Button
+                                        key={reaction.emoji}
+                                        variant="outline"
+                                        size="sm"
+                                        className={cn(
+                                            'h-6 px-1.5 text-xs gap-1',
+                                            reaction.userIds.includes(currentUserId || '') &&
+                                                'bg-primary/10 border-primary/30'
+                                        )}
+                                        onClick={() => handleReaction(reaction.emoji)}
+                                        disabled={!currentUserId}
+                                    >
+                                        <span>{reaction.emoji}</span>
+                                        <span>{reaction.count}</span>
+                                    </Button>
+                                ))}
 
                             {isSignedIn && (
                                 <Popover>

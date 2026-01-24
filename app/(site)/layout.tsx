@@ -3,9 +3,8 @@ import { Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import React from 'react'
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as SonnerToaster } from 'sonner'
-import type { Viewport } from 'next'
+import { Toaster } from '@/components/ui/sonner'
+import type { Metadata, Viewport } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/app/ConvexClientProvider'
 
@@ -32,7 +31,7 @@ export const viewport: Viewport = {
     ]
 }
 
-export const metadata = {
+export const metadata: Metadata = {
     title: {
         default: 'MikArt Europe',
         template: `%s | MikArt Europe`
@@ -81,8 +80,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         <ConvexClientProvider>
                             {children}
 
-                            <Toaster />
-                            <SonnerToaster richColors position="top-center" />
+                            <Toaster position="top-center" />
                         </ConvexClientProvider>
                     </ClerkProvider>
                 </ThemeProvider>
