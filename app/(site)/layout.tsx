@@ -1,24 +1,25 @@
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
 
 import '@/styles/globals.css'
-import {ThemeProvider} from '@/components/theme-provider'
+import { ThemeProvider } from '@/components/theme-provider'
 import React from 'react'
-import {Toaster} from '@/components/ui/toaster'
-import type {Viewport} from 'next'
-import {ClerkProvider} from "@clerk/nextjs";
-import ConvexClientProvider from "@/app/ConvexClientProvider";
+import { Toaster } from '@/components/ui/toaster'
+import { Toaster as SonnerToaster } from 'sonner'
+import type { Viewport } from 'next'
+import { ClerkProvider } from '@clerk/nextjs'
+import ConvexClientProvider from '@/app/ConvexClientProvider'
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-sans'});
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
 const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
+    variable: '--font-geist-sans',
+    subsets: ['latin']
+})
 
 const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
+    variable: '--font-geist-mono',
+    subsets: ['latin']
+})
 
 interface RootLayoutProps {
     children: React.ReactNode
@@ -26,8 +27,8 @@ interface RootLayoutProps {
 
 export const viewport: Viewport = {
     themeColor: [
-        {media: '(prefers-color-scheme: light)', color: 'white'},
-        {media: '(prefers-color-scheme: dark)', color: 'black'}
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' }
     ]
 }
 
@@ -71,22 +72,21 @@ export const metadata = {
     manifest: `https://www.mikart.eu/site.webmanifest`
 }
 
-export default function RootLayout({children}: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <ClerkProvider>
-                <ConvexClientProvider>
-                    {children}
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                    <ClerkProvider>
+                        <ConvexClientProvider>
+                            {children}
 
-                    <Toaster/>
-                </ConvexClientProvider>
-            </ClerkProvider>
-        </ThemeProvider>
-        </body>
+                            <Toaster />
+                            <SonnerToaster richColors position="top-center" />
+                        </ConvexClientProvider>
+                    </ClerkProvider>
+                </ThemeProvider>
+            </body>
         </html>
     )
 }

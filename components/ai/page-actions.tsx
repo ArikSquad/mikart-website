@@ -10,11 +10,11 @@ import { cva } from 'class-variance-authority'
 const cache = new Map<string, string>()
 
 export function LLMCopyButton({
-                                  /**
-                                   * A URL to fetch the raw Markdown/MDX content of page
-                                   */
-                                  markdownUrl
-                              }: {
+    /**
+     * A URL to fetch the raw Markdown/MDX content of page
+     */
+    markdownUrl
+}: {
     markdownUrl: string
 }) {
     const [isLoading, setLoading] = useState(false)
@@ -63,9 +63,9 @@ const optionVariants = cva(
 )
 
 export function ViewOptions({
-                                markdownUrl,
-                                githubUrl
-                            }: {
+    markdownUrl,
+    githubUrl
+}: {
     /**
      * A URL to the raw Markdown/MDX content of page
      */

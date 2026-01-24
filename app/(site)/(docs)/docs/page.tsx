@@ -1,4 +1,4 @@
-import {Building2, House, Library} from 'lucide-react'
+import { Building2, House, Library } from 'lucide-react'
 import Link, { type LinkProps } from 'next/link'
 
 export default function DocsPage() {

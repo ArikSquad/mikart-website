@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { useEditor, EditorContent } from "@tiptap/react"
-import { StarterKit } from "@tiptap/starter-kit"
-import { Image } from "@tiptap/extension-image"
-import { TaskItem, TaskList } from "@tiptap/extension-list"
-import { TextAlign } from "@tiptap/extension-text-align"
-import { Highlight } from "@tiptap/extension-highlight"
-import { Subscript } from "@tiptap/extension-subscript"
-import { Superscript } from "@tiptap/extension-superscript"
+import { useEditor, EditorContent } from '@tiptap/react'
+import { StarterKit } from '@tiptap/starter-kit'
+import { Image } from '@tiptap/extension-image'
+import { TaskItem, TaskList } from '@tiptap/extension-list'
+import { TextAlign } from '@tiptap/extension-text-align'
+import { Highlight } from '@tiptap/extension-highlight'
+import { Subscript } from '@tiptap/extension-subscript'
+import { Superscript } from '@tiptap/extension-superscript'
 
 interface TiptapRendererProps {
     content: any
@@ -18,24 +18,24 @@ export function TiptapRenderer({ content, className }: TiptapRendererProps) {
     const editor = useEditor({
         editable: false,
         immediatelyRender: false,
-        content: content || { type: "doc", content: [] },
+        content: content || { type: 'doc', content: [] },
         extensions: [
             StarterKit.configure({
-                horizontalRule: {},
+                horizontalRule: {}
             }),
             Image,
             TaskList,
             TaskItem,
-            TextAlign.configure({ types: ["heading", "paragraph"] }),
+            TextAlign.configure({ types: ['heading', 'paragraph'] }),
             Highlight.configure({ multicolor: true }),
             Subscript,
-            Superscript,
+            Superscript
         ],
         editorProps: {
             attributes: {
-                class: className || "",
-            },
-        },
+                class: className || ''
+            }
+        }
     })
 
     if (!editor) {

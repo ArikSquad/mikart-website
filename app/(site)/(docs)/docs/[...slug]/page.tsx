@@ -1,13 +1,13 @@
 import { source } from '@/lib/source'
-import {DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate} from 'fumadocs-ui/page'
+import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from 'fumadocs-ui/page'
 import { notFound } from 'next/navigation'
 import { getMDXComponents } from '@/mdx-components'
 import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions'
-import {Metadata} from "next";
+import { Metadata } from 'next'
 
 export default async function Page(props: PageProps<'/docs/[...slug]'>) {
     const params = await props.params
-    const page = source.getPage(params.slug);
+    const page = source.getPage(params.slug)
     if (!page) notFound()
 
     const { body: Mdx, toc, lastModified } = await page.data.load()

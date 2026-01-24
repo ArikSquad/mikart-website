@@ -45,7 +45,7 @@ export function MainNav({ items, children, showLogo = true, className }: MainNav
                         />
                         <div className="absolute inset-0 rounded-lg bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                    <span className="hidden sm:block font-bold text-lg bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                    <span className="hidden sm:block font-bold text-lg bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                         MikArt
                     </span>
                 </Link>

@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
-import {Card, CardContent, CardFooter} from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { ArrowRight, Shield, Bot, Zap, Users, Star, ExternalLink } from 'lucide-react'
 import { mainNavItems } from '@/lib/navigation'
-import {Metadata} from "next";
+import { Metadata } from 'next'
 
 const messages = ['love', 'code', 'hax', 'dedication', 'passion', 'innovation']
 
@@ -80,8 +80,8 @@ function Home() {
                             </Badge>
                             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Various open-source projects</h2>
                             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                                From gaming-related projects to open-source contributions, explore our diverse range of tools
-                                we offer.
+                                From gaming-related projects to open-source contributions, explore our diverse range of
+                                tools we offer.
                             </p>
                         </div>
 
@@ -142,8 +142,8 @@ function Home() {
                                     </div>
 
                                     <p className="text-muted-foreground">
-                                        Modern Discord bot with advanced features for server management, moderation,
-                                        and community engagement. Built for the future.
+                                        Modern Discord bot with advanced features for server management, moderation, and
+                                        community engagement. Built for the future.
                                     </p>
                                 </CardContent>
 
@@ -158,9 +158,7 @@ function Home() {
 
                                         <Link
                                             href="https://ensave.mikart.eu/"
-                                            className={cn(
-                                                buttonVariants({ size: 'sm', variant: 'outline' }),
-                                            )}
+                                            className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}
                                         >
                                             Explore
                                             <ExternalLink className="ml-2 h-3 w-3 transition-transform" />
@@ -200,9 +198,7 @@ function Home() {
 
                                         <Link
                                             href="/docs/gs"
-                                            className={cn(
-                                                buttonVariants({ size: 'sm', variant: 'outline' })
-                                            )}
+                                            className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}
                                         >
                                             Learn More
                                             <ExternalLink className="ml-2 h-3 w-3 transition-transform" />

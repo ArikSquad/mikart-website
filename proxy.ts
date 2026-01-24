@@ -1,17 +1,17 @@
-import {clerkMiddleware, createRouteMatcher} from '@clerk/nextjs/server'
-import {NextResponse} from 'next/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
 const isAdminRoute = createRouteMatcher(['/admin'])
 
 export default clerkMiddleware(async (auth, req) => {
-    const { isAuthenticated, sessionClaims, redirectToSignIn } = await auth();
+    const { isAuthenticated, sessionClaims, redirectToSignIn } = await auth()
     if (isAdminRoute(req)) {
         if (!isAuthenticated) {
-            return redirectToSignIn({returnBackUrl: req.url});
+            return redirectToSignIn({ returnBackUrl: req.url })
         }
         if (sessionClaims?.metadata?.role !== 'admin') {
-            const url = new URL('/', req.url);
-            return NextResponse.redirect(url);
+            const url = new URL('/', req.url)
+            return NextResponse.redirect(url)
         }
     }
 })
@@ -24,5 +24,5 @@ export const config = {
         '/(api|trpc)(.*)',
         '/admin/:path*',
         '/api/:path*'
-    ],
+    ]
 }

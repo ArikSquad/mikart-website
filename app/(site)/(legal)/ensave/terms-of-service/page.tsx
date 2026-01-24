@@ -1,7 +1,7 @@
 import React from 'react'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
-import {Metadata} from "next";
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'EnSave | Terms of Service'
