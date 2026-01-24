@@ -8,7 +8,6 @@ import { motion, type Variants } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Home, Search } from 'lucide-react'
 import Link from 'next/link'
-import {Metadata} from "next";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -21,11 +20,6 @@ const geistMono = Geist_Mono({
     variable: '--font-geist-mono',
     subsets: ['latin']
 })
-
-export const metadata: Metadata = {
-    title: '404 - Page Not Found',
-    description: 'The page you are looking for does not exist.'
-}
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
