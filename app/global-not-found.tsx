@@ -10,7 +10,6 @@ import { ArrowLeft, Home, Search } from 'lucide-react'
 import Link from 'next/link'
 import type {Metadata} from "next";
 import {metadata as m} from "@/types/metadata";
-import Footer from "@/components/footer";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -235,7 +234,6 @@ export default function NotFound() {
                             </motion.div>
                         </motion.div>
                     </div>
-                    <Footer />
                 </ThemeProvider>
             </body>
         </html>
