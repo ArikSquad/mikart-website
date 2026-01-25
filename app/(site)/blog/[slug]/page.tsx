@@ -33,14 +33,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title: postData.title,
             description: postData.description,
+            locale: 'en_US',
             type: 'article',
             authors: postData.author ? ['https://www.mikart.eu/profile/' + postData.author.clerkId] : [],
-            images: postData.author?.avatar
+            siteName: 'MikArt Europe'
         },
+        keywords: postData.tags,
         twitter: {
             title: postData.title,
             description: postData.description,
-            images: postData.author?.avatar,
             card: 'summary_large_image'
         },
         creator: postData.author?.name,
