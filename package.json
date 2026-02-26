@@ -51,7 +51,7 @@
         "groq": "^5.9.0",
         "input-otp": "^1.4.2",
         "lodash.throttle": "^4.1.1",
-        "lucide-react": "^0.563.0",
+        "lucide-react": "^0.575.0",
         "mdast-util-toc": "^7.1.0",
         "mini-svg-data-uri": "^1.4.4",
         "next": "^16.1.6",
