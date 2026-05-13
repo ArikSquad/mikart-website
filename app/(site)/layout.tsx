@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/app/ConvexClientProvider'
 import { metadata as m } from '@/types/metadata'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -41,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                     <ClerkProvider>
                         <ConvexClientProvider>
-                            {children}
+                            <TooltipProvider>{children}</TooltipProvider>
 
                             <Toaster position="top-center" />
                         </ConvexClientProvider>

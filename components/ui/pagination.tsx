@@ -17,7 +17,7 @@ function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
 }
 
 function PaginationContent({ className, ...props }: React.ComponentProps<'ul'>) {
-    return <ul data-slot="pagination-content" className={cn('gap-1 flex items-center', className)} {...props} />
+    return <ul data-slot="pagination-content" className={cn('flex items-center gap-1', className)} {...props} />
 }
 
 function PaginationItem({ ...props }: React.ComponentProps<'li'>) {
@@ -42,19 +42,27 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
     )
 }
 
-function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationPrevious({
+    className,
+    text = 'Previous',
+    ...props
+}: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
     return (
         <PaginationLink aria-label="Go to previous page" size="default" className={cn('pl-2!', className)} {...props}>
             <ChevronLeftIcon data-icon="inline-start" />
-            <span className="hidden sm:block">Previous</span>
+            <span className="hidden sm:block">{text}</span>
         </PaginationLink>
     )
 }
 
-function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
+function PaginationNext({
+    className,
+    text = 'Next',
+    ...props
+}: React.ComponentProps<typeof PaginationLink> & { text?: string }) {
     return (
         <PaginationLink aria-label="Go to next page" size="default" className={cn('pr-2!', className)} {...props}>
-            <span className="hidden sm:block">Next</span>
+            <span className="hidden sm:block">{text}</span>
             <ChevronRightIcon data-icon="inline-end" />
         </PaginationLink>
     )
@@ -65,10 +73,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
         <span
             aria-hidden
             data-slot="pagination-ellipsis"
-            className={cn(
-                "size-9 items-center justify-center [&_svg:not([class*='size-'])]:size-4 flex items-center justify-center",
-                className
-            )}
+            className={cn("flex size-9 items-center justify-center [&_svg:not([class*='size-'])]:size-4", className)}
             {...props}
         >
             <MoreHorizontalIcon />
