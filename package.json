@@ -44,7 +44,7 @@
         "date-fns": "^4.1.0",
         "embla-carousel-react": "^8.6.0",
         "eslint": "10.3.0",
-        "eslint-config-next": "16.2.6",
+        "eslint-config-next": "16.2.7",
         "framer-motion": "^12.38.0",
         "fumadocs-core": "^16.8.10",
         "fumadocs-mdx": "^15.0.4",
