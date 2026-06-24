@@ -5,7 +5,7 @@ import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons'
 export const source = loader({
     baseUrl: '/docs',
     source: docs.toFumadocsSource(),
-    plugins: [pageTreeCodeTitles(), lucideIconsPlugin()]
+    plugins: [lucideIconsPlugin()]
 })
 
 function pageTreeCodeTitles(): LoaderPlugin {

@@ -25,6 +25,12 @@ export default function DocsPage() {
                         description: 'Event plugin for Minecraft servers.',
                         icon: <House className="size-full" />,
                         href: '/docs/panoptic'
+                    },
+                    {
+                        name: 'Tava',
+                        description: 'modular Java 21 database toolkit',
+                        icon: <Library className="size-full" />,
+                        href: '/docs/tava'
                     }
                 ].map((item) => (
                     <Item key={item.name} href={item.href}>

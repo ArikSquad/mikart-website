@@ -2,8 +2,8 @@ import { source } from '@/lib/source'
 import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from 'fumadocs-ui/page'
 import { notFound } from 'next/navigation'
 import { getMDXComponents } from '@/components/mdx'
-import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions'
 import { Metadata } from 'next'
+import { MarkdownCopyButton, ViewOptionsPopover } from 'fumadocs-ui/layouts/docs/page'
 
 export default async function Page(props: PageProps<'/docs/[...slug]'>) {
     const params = await props.params
@@ -21,11 +21,13 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
                 style: 'clerk'
             }}
         >
-            <DocsTitle>{page.data.title}</DocsTitle>
-            <DocsDescription>{page.data.description}</DocsDescription>
+            <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
+            <p className="text-muted-foreground">
+                {page.data.description}
+            </p>
             <div className="flex flex-row gap-2 items-center border-b pb-6">
-                <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-                <ViewOptions
+                <MarkdownCopyButton markdownUrl={`${page.url}.mdx`} />
+                <ViewOptionsPopover
                     markdownUrl={`${page.url}.mdx`}
                     githubUrl={`https://github.com/MikArt-Europe/website/blob/main/apps/docs/content/docs/${page.path}`}
                 />
@@ -33,6 +35,7 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
             <DocsBody>
                 <Mdx components={getMDXComponents()} />
             </DocsBody>
+            {lastModified && <PageLastUpdate date={lastModified} />}
         </DocsPage>
     )
 }
