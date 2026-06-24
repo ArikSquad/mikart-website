@@ -1,15 +1,15 @@
 'use client'
 
-import type { Editor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 
 type Orientation = 'horizontal' | 'vertical' | 'both'
+type EditorLike = { view: { dom: HTMLElement } }
 
 interface MenuNavigationOptions<T> {
     /**
-     * The Tiptap editor instance, if using with a Tiptap editor.
+     * Optional editor instance when keyboard events should attach to an editor DOM node.
      */
-    editor?: Editor | null
+    editor?: EditorLike | null
     /**
      * Reference to the container element for handling keyboard events.
      */
@@ -46,7 +46,7 @@ interface MenuNavigationOptions<T> {
  * Hook that implements keyboard navigation for dropdown menus and command palettes.
  *
  * Handles arrow keys, tab, home/end, enter for selection, and escape to close.
- * Works with both Tiptap editors and regular DOM elements.
+ * Works with both editor DOM nodes and regular DOM elements.
  *
  * @param options - Configuration options for the menu navigation
  * @returns Object containing the selected index and a setter function

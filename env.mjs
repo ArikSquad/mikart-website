@@ -8,7 +8,8 @@ export const env = createEnv({
      * Will throw if you access these variables on the client.
      */
     server: {
-        CLERK_SECRET_KEY: z.string().min(1)
+        CLERK_SECRET_KEY: z.string().min(1),
+        UPLOADTHING_TOKEN: z.string().min(1)
     },
     /*
      * Environment variables available on the client (and server).
@@ -21,7 +22,7 @@ export const env = createEnv({
         NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
         NEXT_PUBLIC_CONVEX_URL: z.string().min(1),
         NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
-        NEXT_PUBLIC_POSTHOG_HOST: z.string().url()
+        NEXT_PUBLIC_POSTHOG_HOST: z.url()
     },
     /*
      * Due to how Next.js bundles environment variables on Edge and Client,
@@ -31,6 +32,7 @@ export const env = createEnv({
      */
     runtimeEnv: {
         CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+        UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
         NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
         NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL,
         NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,

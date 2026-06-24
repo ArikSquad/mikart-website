@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ChevronLeft, CalendarDays, Clock, ExternalLink, Share2, ArrowUp } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { TiptapRenderer } from '@/components/blog/tiptap-renderer'
+import { PlateRenderer } from '@/components/blog/plate-renderer'
 import { CommentSection } from '@/components/blog/comment-section'
 import { MainNav } from '@/components/taxomony/main-nav'
 import { mainNavItems } from '@/lib/navigation'
@@ -231,7 +231,7 @@ export default function PostPage() {
 
             <article className="mx-auto max-w-4xl px-4 py-12">
                 <div className="prose prose-lg prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-headings:font-heading prose-headings:font-bold prose-a:text-primary prose-a:no-underline prose-img:rounded-xl">
-                    <TiptapRenderer content={post.content} />
+                    <PlateRenderer content={post.content} />
                 </div>
 
                 <Separator className="my-12" />

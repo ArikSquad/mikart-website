@@ -23,8 +23,6 @@
         "paths": {
             "@/*": ["./*"],
             "~/*": ["./*"],
-            "contentlayer/generated": ["./.contentlayer/generated"],
-            "@payload-config": ["./payload.config.ts"],
             "fumadocs-mdx/collections/*": [".source/*"]
         }
     },
@@ -33,7 +31,6 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        ".contentlayer/generated",
         ".next/dev/types/**/*.ts"
     ],
     "exclude": ["node_modules"]
