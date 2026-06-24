@@ -1,7 +1,7 @@
 import { source } from '@/lib/source'
 import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from 'fumadocs-ui/page'
 import { notFound } from 'next/navigation'
-import { getMDXComponents } from '@/components/mdx';
+import { getMDXComponents } from '@/components/mdx'
 import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions'
 import { Metadata } from 'next'
 
