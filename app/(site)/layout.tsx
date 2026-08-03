@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
+import { Cormorant_Garamond, Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
 
 import '@/styles/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -22,6 +22,12 @@ const geistMono = Geist_Mono({
     subsets: ['latin']
 })
 
+const editorialSerif = Cormorant_Garamond({
+    variable: '--font-editorial',
+    subsets: ['latin'],
+    weight: ['500', '600']
+})
+
 interface RootLayoutProps {
     children: React.ReactNode
 }
@@ -38,7 +44,7 @@ export const metadata: Metadata = m
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                     <ClerkProvider>
                         <ConvexClientProvider>

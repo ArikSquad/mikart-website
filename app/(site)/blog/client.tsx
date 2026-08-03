@@ -34,10 +34,6 @@ function HeroSection() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
             <div className="mx-auto max-w-7xl px-4 pt-32 pb-16 relative">
                 <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                        <Sparkles className="h-4 w-4" />
-                        Insights & Updates
-                    </div>
                     <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight font-bold bg-linear-to-br from-foreground via-foreground to-foreground/70 bg-clip-text">
                         Our Blog
                     </h1>
