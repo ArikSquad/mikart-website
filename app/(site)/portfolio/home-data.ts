@@ -4,21 +4,98 @@ import { Mail } from 'lucide-react'
 export type ProjectData = {
     index: string
     name: string
+    category: string
     strap: string
     detail: string
+    outcome: string
     tags: readonly string[]
     image?: string
+    visual: 'image' | 'tava' | 'platform' | 'terminal'
     href: string
     link: string
     theme: string
 }
 
 export const projects: readonly ProjectData[] = [
-    { index: '01', name: 'Salattu', strap: 'Your digital life, secured.', detail: 'A cross-platform password manager with a Rust core, Java services, and one coherent product surface.', tags: ['React Native', 'Java', 'Next.js', 'Convex'], image: '/assets/ariksquad/salattu.png', href: 'https://salattu.mikart.eu', link: 'Visit product', theme: 'orange' },
-    { index: '02', name: 'Tava', strap: 'Type safety without the ceremony.', detail: 'A Java 21 database toolkit built around canonical models, explicit adapters, and honest capabilities.', tags: ['Java 21', 'JDBC', 'NoSQL', 'DynamoDB'], href: '/docs/tava', link: 'Read the docs', theme: 'blue' },
-    { index: '03', name: 'GroupSecurity', strap: 'Security that understands the game.', detail: 'Configurable security engines, actions, and audit trails for busy Minecraft communities.', tags: ['Java', 'Security', 'Minecraft'], image: '/assets/ariksquad/groupsecurity.png', href: '/docs/gs', link: 'Explore the system', theme: 'violet' },
-    { index: '04', name: 'EnSave', strap: 'Community operations, composed.', detail: 'Discord automation and a focused web dashboard for moderation, management, and everyday workflows.', tags: ['TypeScript', 'Convex', 'PostgreSQL'], image: '/assets/ariksquad/ensave.png', href: 'https://ensave.mikart.eu', link: 'Open EnSave', theme: 'green' }
+    {
+        index: '01',
+        name: 'Tava',
+        category: 'Data infrastructure',
+        strap: 'A typed data layer for Java.',
+        detail: 'Tava keeps one model at the center and makes each storage adapter state its limits.',
+        outcome: 'Less glue code, and fewer promises the backend cannot keep.',
+        tags: ['Java 21', 'JDBC', 'NoSQL', 'DynamoDB'],
+        visual: 'tava',
+        href: '/docs/tava',
+        link: 'Read the system',
+        theme: 'lime'
+    },
+    {
+        index: '02',
+        name: 'Hypixel Recreation',
+        category: 'Game platforms',
+        strap: 'A Minecraft platform with room to grow.',
+        detail: 'Rebuilding a large game world without Spigot meant getting the boundaries right before the content got big.',
+        outcome: 'New game modes can sit on shared systems instead of copying the old ones.',
+        tags: ['Java', 'Minecraft', 'Platform design', 'Scale'],
+        visual: 'platform',
+        href: 'https://github.com/Swofty-Developments/HypixelRecreation',
+        link: 'See the repository',
+        theme: 'blue'
+    },
+    {
+        index: '03',
+        name: 'Salattu',
+        category: 'Security software',
+        strap: 'A password manager with a Rust core.',
+        detail: 'A cross-platform product with Rust at the center, Java services behind it, and a calmer surface for the daily work.',
+        outcome: 'The hard security work stays underneath one understandable product.',
+        tags: ['Rust', 'Java', 'React Native', 'Convex'],
+        image: '/assets/ariksquad/salattu.png',
+        visual: 'image',
+        href: 'https://salattu.mikart.eu',
+        link: 'Open Salattu',
+        theme: 'violet'
+    },
+    {
+        index: '04',
+        name: 'EnSave',
+        category: 'Community operations',
+        strap: 'Tools for the people running a community.',
+        detail: 'Discord automation and a focused dashboard for moderation, management, and the small jobs that fill every day.',
+        outcome: 'The work becomes visible, repeatable, and easier to hand over.',
+        tags: ['TypeScript', 'Discord', 'Convex', 'PostgreSQL'],
+        image: '/assets/ariksquad/ensave.png',
+        visual: 'image',
+        href: 'https://ensave.mikart.eu',
+        link: 'Open EnSave',
+        theme: 'orange'
+    }
 ]
+
+export const proofPoints = [
+    { value: '10k+', label: 'people reached by hosted services' },
+    { value: '81', label: 'public repositories to learn from' },
+    { value: '6', label: 'languages used when the problem asks for it' }
+] as const
+
+export const capabilities = [
+    {
+        number: '01',
+        title: 'Make the boundary clear.',
+        copy: 'Typed models, explicit adapters, and APIs that make the wrong path feel harder to take.'
+    },
+    {
+        number: '02',
+        title: 'Design for the next subsystem.',
+        copy: 'Game platforms, plugins, and services are healthier when new work does not require rewriting old work.'
+    },
+    {
+        number: '03',
+        title: 'Leave the operator calmer.',
+        copy: 'Good tooling reduces cognitive load for the person who has to run it, debug it, and trust it on a bad day.'
+    }
+] as const
 
 export const socials = [
     { label: 'GitHub', handle: 'ariksquad', href: 'https://github.com/ariksquad', icon: SiGithub },
@@ -31,5 +108,10 @@ export const socials = [
 export const ease = [0.22, 1, 0.36, 1] as const
 
 export function helsinkiTime() {
-    return new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Helsinki', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date())
+    return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Helsinki',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    }).format(new Date())
 }
