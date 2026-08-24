@@ -2,7 +2,6 @@
     "compilerOptions": {
         "target": "ES2017",
         "lib": ["dom", "dom.iterable", "esnext"],
-        "baseUrl": ".",
         "allowJs": true,
         "skipLibCheck": true,
         "strict": true,
@@ -23,7 +22,7 @@
         "paths": {
             "@/*": ["./*"],
             "~/*": ["./*"],
-            "fumadocs-mdx/collections/*": [".source/*"]
+            "fumadocs-mdx/collections/*": ["./.source/*"]
         }
     },
     "include": [
