@@ -22,7 +22,8 @@ import { RevealOnScroll } from './reveal'
 import { SiteNavigation } from './site-navigation'
 
 export function PortfolioPage() {
-    const [time, setTime] = useState(helsinkiTime)
+    const [time, setTime] = useState('')
+    const [currentYear, setCurrentYear] = useState<number | null>(null)
     const [menuOpen, setMenuOpen] = useState(false)
     const [copied, setCopied] = useState(false)
     const [activeProject, setActiveProject] = useState(0)
@@ -41,6 +42,7 @@ export function PortfolioPage() {
     useEffect(() => {
         const update = () => setTime(helsinkiTime())
         update()
+        setCurrentYear(new Date().getFullYear())
         const timer = window.setInterval(update, 30_000)
         return () => window.clearInterval(timer)
     }, [])
@@ -321,7 +323,7 @@ export function PortfolioPage() {
                     ))}
                 </div>
                 <div className="footer-bottom">
-                    <span>© {new Date().getFullYear()} ArikSquad / MikArt Europe</span>
+                    <span>© {currentYear ?? ''} ArikSquad / MikArt Europe</span>
                     <span>Finland / {time}</span>
                     <a href="#top">Back to top ↑</a>
                 </div>
