@@ -29,8 +29,8 @@ export function HeroSection({ reducedMotion }: { reducedMotion: boolean | null }
                         platforms, security software, and the tools around communities.
                     </p>
                     <div className="hero-actions">
-                        <Link className="button button-primary" href="#work">
-                            Work <ArrowUpRight size={16} />
+                        <Link className="button button-primary" href="/blog">
+                            Blog <ArrowUpRight size={16} />
                         </Link>
                         <Link className="button button-quiet" href="https://github.com/ariksquad" target="_blank" rel="noreferrer">
                             GitHub <SiGithub size={15} />

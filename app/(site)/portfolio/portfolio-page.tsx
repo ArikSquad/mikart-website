@@ -34,7 +34,8 @@ export function PortfolioPage() {
         offset: ['start start', 'end end']
     })
     const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.25 })
-    const thresholdLineX = useTransform(thresholdProgress, [0, 1], ['0vw', '-14vw'])
+    const thresholdLineTargetX = useTransform(thresholdProgress, [0, 1], ['0vw', '-5vw'])
+    const thresholdLineX = useSpring(thresholdLineTargetX, { stiffness: 110, damping: 30, mass: 0.35 })
     const thresholdColor = useTransform(thresholdProgress, [0, 0.5, 1], ['#151914', '#1d221b', '#202334'])
 
     useEffect(() => {
@@ -84,19 +85,15 @@ export function PortfolioPage() {
             </div>
 
             <section className="about-section" id="about">
-                <div className="section-bar">
-                    <span>About</span>
-                    <span>Software engineer / Finland</span>
-                </div>
                 <div className="about-grid">
                     <RevealOnScroll>
                         <h2>
-                            Most of my work happens where software gets <em>complicated.</em>
+                            most of my work happens where software gets <em>complicated.</em>
                         </h2>
                     </RevealOnScroll>
                     <div className="about-copy">
                         <p>
-                            I like the places where a “simple feature” turns into a question about boundaries, scale,
+                            I like the places where feature implementation turns into a question about boundaries, scale,
                             operators, or trust. That has led me from Java infrastructure and Minecraft platforms to Rust
                             experiments, security products, and web tools people actually have to live with.
                         </p>
@@ -121,7 +118,7 @@ export function PortfolioPage() {
                         The next person should not have to guess
                     </motion.p>
                     <div className="threshold-copy">
-                        <h2>The version someone else inherits matters.</h2>
+                        <h2>the version someone else inherits matters.</h2>
                         <p>I care about the hour after I leave the room: when somebody else has to understand the model, find the edge, and make the next change.</p>
                     </div>
                     <div className="threshold-aside">
@@ -131,14 +128,10 @@ export function PortfolioPage() {
             </section>
 
             <section className="work-section" id="work">
-                <div className="section-bar section-bar-dark">
-                    <span>Work</span>
-                    <span>A few things I built</span>
-                </div>
                 <div className="work-heading">
                     <RevealOnScroll>
                         <h2>
-                            Things I
+                            things I
                             <br />
                             <em>built.</em>
                         </h2>
@@ -197,13 +190,9 @@ export function PortfolioPage() {
             </section>
 
             <section className="practice-section" id="principles">
-                <div className="section-bar">
-                    <span>Principles</span>
-                    <span>How I work</span>
-                </div>
                 <div className="practice-heading">
                     <h2>
-                        Built for <em>change.</em>
+                        built for <em>change.</em>
                     </h2>
                     <p>
                         The feature is only the beginning. The real craft is in making the system legible to its next
@@ -213,7 +202,6 @@ export function PortfolioPage() {
                 <div className="capability-grid">
                     {capabilities.map((capability) => (
                         <RevealOnScroll className="capability-card" key={capability.number}>
-                            <span className="capability-number">{capability.number}</span>
                             <h3>{capability.title}</h3>
                             <p>{capability.copy}</p>
                         </RevealOnScroll>
@@ -230,22 +218,18 @@ export function PortfolioPage() {
                 <Link href="/blog" className="route-card route-card-blue">
                     <span className="route-icon"><Terminal size={20} /></span>
                     <small>Field notes from the workbench</small>
-                    <strong>Read the notes.</strong>
+                    <strong>read the notes.</strong>
                     <ArrowUpRight />
                 </Link>
                 <Link href="/docs" className="route-card route-card-lime">
                     <span className="route-icon"><Database size={20} /></span>
                     <small>APIs, setup, and decisions</small>
-                    <strong>Open the docs.</strong>
+                    <strong>project docs.</strong>
                     <ArrowUpRight />
                 </Link>
             </section>
 
             <section className="contact-section" id="hello">
-                <div className="section-bar section-bar-contact">
-                    <span>Contact</span>
-                    <span>Open to the right problem</span>
-                </div>
                 <div className="contact-content">
                     <div>
                         <h2>Have a problem<br /><em>worth solving?</em></h2>
@@ -258,8 +242,8 @@ export function PortfolioPage() {
                         whileHover={prefersReducedMotion ? undefined : { y: -4 }}
                         whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
                     >
-                        <Mail size={31} />
-                        <span>{copied ? 'Copied' : 'Start a conversation'}</span>
+                        <Mail className="text-white" size={31} />
+                        <span className="text-white">{copied ? 'Copied' : 'Start a conversation'}</span>
                     </motion.button>
                 </div>
             </section>
@@ -271,7 +255,7 @@ export function PortfolioPage() {
                 </div>
                 <div className="footer-main">
                     <div className="footer-title">
-                        <h2>Make useful<br /><em>things.</em></h2>
+                        <h2>make useful<br /><em>things.</em></h2>
                     </div>
                     <div className="footer-nav">
                         <small>Navigate</small>

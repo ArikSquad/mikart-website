@@ -76,23 +76,23 @@ export const projects: readonly ProjectData[] = [
 export const proofPoints = [
     { value: '10k+', label: 'people reached by hosted services' },
     { value: '81', label: 'public repositories to learn from' },
-    { value: '6', label: 'languages used when the problem asks for it' }
+    { value: '?', label: 'always choosing the right tech for the job' }
 ] as const
 
 export const capabilities = [
     {
         number: '01',
-        title: 'Make the boundary clear.',
+        title: 'make the boundary clear.',
         copy: 'Typed models, explicit adapters, and APIs that make the wrong path feel harder to take.'
     },
     {
         number: '02',
-        title: 'Design for the next subsystem.',
+        title: 'design for the next subsystem.',
         copy: 'Game platforms, plugins, and services are healthier when new work does not require rewriting old work.'
     },
     {
         number: '03',
-        title: 'Leave the operator calmer.',
+        title: 'leave the operator calmer.',
         copy: 'Good tooling reduces cognitive load for the person who has to run it, debug it, and trust it on a bad day.'
     }
 ] as const

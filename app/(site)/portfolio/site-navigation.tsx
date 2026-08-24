@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ease } from './home-data'
+import Image from "next/image";
 
 export function SiteNavigation({
     menuOpen,
@@ -19,7 +20,7 @@ export function SiteNavigation({
     const links = [
         ['01', 'Work', '#work'],
         ['02', 'About', '#about'],
-        ['03', 'Notes', '/blog'],
+        ['03', 'Blog', '/blog'],
         ['04', 'Docs', '/docs'],
         ['05', 'Hello', '#hello']
     ] as const
@@ -28,7 +29,7 @@ export function SiteNavigation({
         <>
             <header className="site-nav">
                 <Link className="site-brand" href="/" aria-label="MikArt Europe home">
-                    <span className="brand-mark">M</span>
+                    <Image className="w-8 brightness-0 invert" src="/logo.svg" alt="logo" width={64} height={64} />
                     <span>
                         <strong>MikArt</strong>
                         <small>Europe</small>
@@ -36,7 +37,7 @@ export function SiteNavigation({
                 </Link>
                 <nav className="site-nav-links" aria-label="Primary navigation">
                     <Link href="#work">Work</Link>
-                    <Link href="/blog">Notes</Link>
+                    <Link href="/blog">Blog</Link>
                     <button type="button" onClick={() => setMenuOpen(true)} aria-label="Open navigation menu">
                         Explore <Menu size={17} />
                     </button>
