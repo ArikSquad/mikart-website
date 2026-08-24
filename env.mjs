@@ -17,8 +17,8 @@ export const env = createEnv({
      * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
      */
     client: {
-        NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().min(1),
-        NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().min(1),
+        NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().min(1).default('/'),
+        NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().min(1).default('/'),
         NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
         NEXT_PUBLIC_CONVEX_URL: z.string().min(1),
         NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
