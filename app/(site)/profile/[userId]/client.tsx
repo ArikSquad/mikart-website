@@ -22,7 +22,10 @@ import { cn, formatDate } from '@/lib/utils'
 
 function ProfileHeader() {
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm">
+        <header
+            className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm"
+            style={{ viewTransitionName: 'site-header' }}
+        >
             <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/80" />
             <div className="mx-auto max-w-7xl px-4 relative z-10">
                 <div className="flex h-20 items-center justify-between py-6">
@@ -96,7 +99,7 @@ export default function ProfilePage({ userId }: ProfilePageProps) {
                         <p className="text-muted-foreground mb-6">
                             This user doesn't exist or hasn't been created yet.
                         </p>
-                        <Link href="/blog" className={buttonVariants()}>
+                        <Link href="/blog" className={buttonVariants()} transitionTypes={['nav-back']}>
                             Go to Blog
                         </Link>
                     </div>
@@ -133,6 +136,7 @@ export default function ProfilePage({ userId }: ProfilePageProps) {
                 <div className="mx-auto max-w-4xl px-4 pt-28 pb-12 relative">
                     <Link
                         href="/blog"
+                        transitionTypes={['nav-back']}
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'sm' }),
                             'mb-8 -ml-2 text-muted-foreground hover:text-foreground'
@@ -300,7 +304,12 @@ export default function ProfilePage({ userId }: ProfilePageProps) {
                             const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 
                             return (
-                                <Link key={post._id} href={`/blog/${post.slug}`} className="block">
+                                <Link
+                                    key={post._id}
+                                    href={`/blog/${post.slug}`}
+                                    className="block"
+                                    transitionTypes={['nav-forward']}
+                                >
                                     <Card className="hover:shadow-md transition-all hover:border-primary/30 group">
                                         <CardContent className="p-4">
                                             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { PageTransition } from '@/components/page-transition'
 import BlogPage from '@/app/(site)/blog/client'
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPageServer() {
-    return <BlogPage />
+    return (
+        <PageTransition>
+            <BlogPage />
+        </PageTransition>
+    )
 }

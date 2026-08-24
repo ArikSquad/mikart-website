@@ -36,6 +36,7 @@ export function MobileNav({ items, children, onClose }: MobileNavProps) {
                             className="w-10 h-10 rounded-lg"
                             width={40}
                             height={40}
+                            sizes="40px"
                         />
                     </div>
                     <span className="font-bold text-lg">MikArt</span>
@@ -52,6 +53,7 @@ export function MobileNav({ items, children, onClose }: MobileNavProps) {
                                 key={index}
                                 href={item.disabled ? '#' : item.href}
                                 onClick={onClose}
+                                transitionTypes={item.href === '/' ? ['nav-back'] : ['nav-forward']}
                                 className={cn(
                                     'flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200',
                                     'hover:bg-muted/50 hover:text-foreground',

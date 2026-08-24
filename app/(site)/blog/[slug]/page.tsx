@@ -1,4 +1,5 @@
 import PostPage from '@/app/(site)/blog/[slug]/client'
+import { PageTransition } from '@/components/page-transition'
 import { Metadata } from 'next'
 import { api } from '@/convex/_generated/api'
 import { fetchQuery } from 'convex/nextjs'
@@ -8,7 +9,11 @@ type Props = {
 }
 
 export default function BlogPageServer() {
-    return <PostPage />
+    return (
+        <PageTransition>
+            <PostPage />
+        </PageTransition>
+    )
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -1,4 +1,5 @@
 import ProfilePage from '@/app/(site)/profile/[userId]/client'
+import { PageTransition } from '@/components/page-transition'
 import { api } from '@/convex/_generated/api'
 import { fetchQuery } from 'convex/nextjs'
 import { Metadata } from 'next'
@@ -11,7 +12,11 @@ export default async function ProfilePageServer({ params }: Props) {
     const p = await params
     const userId = p.userId
 
-    return <ProfilePage userId={userId} />
+    return (
+        <PageTransition>
+            <ProfilePage userId={userId} />
+        </PageTransition>
+    )
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -34,7 +34,7 @@ export function MainNav({ items, children, showLogo = true, className }: MainNav
     return (
         <div className={cn('flex items-center justify-between w-full', className)}>
             {showLogo && (
-                <Link href="/" className="flex items-center space-x-3 group">
+                <Link href="/" className="flex items-center space-x-3 group" transitionTypes={['nav-back']}>
                     <div className="relative">
                         <Image
                             src="/assets/logo.png"
@@ -42,6 +42,7 @@ export function MainNav({ items, children, showLogo = true, className }: MainNav
                             className="w-10 h-10 rounded-lg transition-transform group-hover:scale-105"
                             width={40}
                             height={40}
+                            sizes="40px"
                         />
                         <div className="absolute inset-0 rounded-lg bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
@@ -60,6 +61,7 @@ export function MainNav({ items, children, showLogo = true, className }: MainNav
                             <Link
                                 key={index}
                                 href={item.disabled ? '#' : item.href}
+                                transitionTypes={item.href === '/' ? ['nav-back'] : ['nav-forward']}
                                 className={cn(
                                     'relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
                                     'hover:bg-muted/50 hover:text-foreground',

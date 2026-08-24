@@ -16,7 +16,10 @@ import { Metadata } from 'next'
 
 function BlogHeader() {
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm">
+        <header
+            className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm"
+            style={{ viewTransitionName: 'site-header' }}
+        >
             <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/80" />
             <div className="mx-auto max-w-7xl px-4 relative z-10">
                 <div className="flex h-20 items-center justify-between py-6">
@@ -128,7 +131,11 @@ function BlogCard({ post, featured = false }: { post: any; featured?: boolean })
                 </div>
             </CardContent>
 
-            <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-20 no-underline">
+            <Link
+                href={`/blog/${post.slug}`}
+                className="absolute inset-0 z-20 no-underline"
+                transitionTypes={['nav-forward']}
+            >
                 <span className="sr-only">Read {post.title}</span>
             </Link>
         </Card>

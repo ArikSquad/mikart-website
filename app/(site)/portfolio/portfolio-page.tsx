@@ -93,11 +93,16 @@ export function PortfolioPage() {
                     </RevealOnScroll>
                     <div className="about-copy">
                         <p>
-                            I like the places where feature implementation turns into a question about boundaries, scale,
-                            operators, or trust. That has led me from Java infrastructure and Minecraft platforms to Rust
-                            experiments, security products, and web tools people actually have to live with.
+                            I like the places where feature implementation turns into a question about boundaries,
+                            scale, operators, or trust. That has led me from Java infrastructure and Minecraft platforms
+                            to Rust experiments, security products, and web tools people actually have to live with.
                         </p>
-                        <Link className="underlined-link" href="https://github.com/ariksquad" target="_blank" rel="noreferrer">
+                        <Link
+                            className="underlined-link"
+                            href="https://github.com/ariksquad"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             Browse the open source trail <ArrowUpRight size={16} />
                         </Link>
                     </div>
@@ -119,10 +124,16 @@ export function PortfolioPage() {
                     </motion.p>
                     <div className="threshold-copy">
                         <h2>the version someone else inherits matters.</h2>
-                        <p>I care about the hour after I leave the room: when somebody else has to understand the model, find the edge, and make the next change.</p>
+                        <p>
+                            I care about the hour after I leave the room: when somebody else has to understand the
+                            model, find the edge, and make the next change.
+                        </p>
                     </div>
                     <div className="threshold-aside">
-                        <p>Good software does not need to explain itself loudly. It needs to leave fewer mysteries behind.</p>
+                        <p>
+                            Good software does not need to explain itself loudly. It needs to leave fewer mysteries
+                            behind.
+                        </p>
                     </div>
                 </motion.div>
             </section>
@@ -136,9 +147,7 @@ export function PortfolioPage() {
                             <em>built.</em>
                         </h2>
                     </RevealOnScroll>
-                    <p>
-                        These are the kinds of problems I keep returning to. Pick one if you want the details.
-                    </p>
+                    <p>These are the kinds of problems I keep returning to. Pick one if you want the details.</p>
                 </div>
 
                 <div className="project-browser">
@@ -176,9 +185,16 @@ export function PortfolioPage() {
                                 <strong>{currentProject.outcome}</strong>
                             </div>
                             <div className="project-tags">
-                                {currentProject.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                                {currentProject.tags.map((tag) => (
+                                    <span key={tag}>{tag}</span>
+                                ))}
                             </div>
-                            <Link className="button button-panel" href={currentProject.href} target={currentProject.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+                            <Link
+                                className="button button-panel"
+                                href={currentProject.href}
+                                target={currentProject.href.startsWith('http') ? '_blank' : undefined}
+                                rel="noreferrer"
+                            >
                                 {currentProject.link} <ArrowUpRight size={16} />
                             </Link>
                         </div>
@@ -208,21 +224,31 @@ export function PortfolioPage() {
                     ))}
                 </div>
                 <div className="practice-footnote">
-                    <span><ShieldCheck size={16} /> reliable by default</span>
-                    <span><Workflow size={16} /> designed for change</span>
-                    <span><Layers3 size={16} /> systems over symptoms</span>
+                    <span>
+                        <ShieldCheck size={16} /> reliable by default
+                    </span>
+                    <span>
+                        <Workflow size={16} /> designed for change
+                    </span>
+                    <span>
+                        <Layers3 size={16} /> systems over symptoms
+                    </span>
                 </div>
             </section>
 
             <section className="routes-section" aria-label="Explore more">
-                <Link href="/blog" className="route-card route-card-blue">
-                    <span className="route-icon"><Terminal size={20} /></span>
+                <Link href="/blog" className="route-card route-card-blue" transitionTypes={['nav-forward']}>
+                    <span className="route-icon">
+                        <Terminal size={20} />
+                    </span>
                     <small>Field notes from the workbench</small>
                     <strong>read the notes.</strong>
                     <ArrowUpRight />
                 </Link>
-                <Link href="/docs" className="route-card route-card-lime">
-                    <span className="route-icon"><Database size={20} /></span>
+                <Link href="/docs" className="route-card route-card-lime" transitionTypes={['nav-forward']}>
+                    <span className="route-icon">
+                        <Database size={20} />
+                    </span>
                     <small>APIs, setup, and decisions</small>
                     <strong>project docs.</strong>
                     <ArrowUpRight />
@@ -232,8 +258,15 @@ export function PortfolioPage() {
             <section className="contact-section" id="hello">
                 <div className="contact-content">
                     <div>
-                        <h2>Have a problem<br /><em>worth solving?</em></h2>
-                        <p>Tell me what is breaking, what is growing, or what should exist next. I am usually most useful somewhere in the middle of it.</p>
+                        <h2>
+                            Have a problem
+                            <br />
+                            <em>worth solving?</em>
+                        </h2>
+                        <p>
+                            Tell me what is breaking, what is growing, or what should exist next. I am usually most
+                            useful somewhere in the middle of it.
+                        </p>
                     </div>
                     <motion.button
                         type="button"
@@ -255,19 +288,32 @@ export function PortfolioPage() {
                 </div>
                 <div className="footer-main">
                     <div className="footer-title">
-                        <h2>make useful<br /><em>things.</em></h2>
+                        <h2>
+                            make useful
+                            <br />
+                            <em>things.</em>
+                        </h2>
                     </div>
                     <div className="footer-nav">
                         <small>Navigate</small>
                         <Link href="#work">Work</Link>
                         <Link href="#about">About</Link>
-                        <Link href="/blog">Notes</Link>
-                        <Link href="/docs">Docs</Link>
+                        <Link href="/blog" transitionTypes={['nav-forward']}>
+                            Notes
+                        </Link>
+                        <Link href="/docs" transitionTypes={['nav-forward']}>
+                            Docs
+                        </Link>
                     </div>
                 </div>
                 <div className="footer-socials">
                     {socials.map((social) => (
-                        <Link key={social.label} href={social.href} target={social.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+                        <Link
+                            key={social.label}
+                            href={social.href}
+                            target={social.href.startsWith('http') ? '_blank' : undefined}
+                            rel="noreferrer"
+                        >
                             <social.icon />
                             <span>{social.label}</span>
                             <ArrowUpRight size={14} />
@@ -294,7 +340,12 @@ function ProjectVisual({ project }: { project: ProjectData }) {
     if (project.visual === 'image' && project.image) {
         return (
             <div className="visual-image">
-                <Image src={project.image} alt={`${project.name} product preview`} fill sizes="(max-width: 850px) 94vw, 56vw" />
+                <Image
+                    src={project.image}
+                    alt={`${project.name} product preview`}
+                    fill
+                    sizes="(max-width: 850px) 94vw, 56vw"
+                />
             </div>
         )
     }
@@ -307,18 +358,36 @@ function TavaArt() {
     return (
         <div className="tava-visual">
             <div className="tava-window">
-                <div className="window-bar"><span /><span /><span /><small>Repository.java</small></div>
+                <div className="window-bar">
+                    <span />
+                    <span />
+                    <span />
+                    <small>Repository.java</small>
+                </div>
                 <pre>
                     <b>record</b> User(<i>UUID</i> id, <i>String</i> name) {'{}'}
                     {'\n\n'}
-                    <b>var</b> users = tava.table(User.class);{ '\n' }
+                    <b>var</b> users = tava.table(User.class);{'\n'}
                     users.find(where(User::id).is(userId));
                 </pre>
             </div>
             <div className="tava-flow">
-                <span><Braces size={14} /> Model</span><i>→</i><span><GitBranch size={14} /> Adapter</span><i>→</i><span><Database size={14} /> Data</span>
+                <span>
+                    <Braces size={14} /> Model
+                </span>
+                <i>→</i>
+                <span>
+                    <GitBranch size={14} /> Adapter
+                </span>
+                <i>→</i>
+                <span>
+                    <Database size={14} /> Data
+                </span>
             </div>
-            <div className="tava-stamp"><strong>One model.</strong><small>Honest capabilities.</small></div>
+            <div className="tava-stamp">
+                <strong>One model.</strong>
+                <small>Honest capabilities.</small>
+            </div>
         </div>
     )
 }
@@ -329,9 +398,18 @@ function PlatformArt() {
             <div className="platform-index">02</div>
             <div className="platform-caption">one core / separate modes</div>
             <div className="platform-stack" aria-hidden="true">
-                <div><span>world</span><i /></div>
-                <div><span>game modes</span><i /></div>
-                <div><span>shared systems</span><i /></div>
+                <div>
+                    <span>world</span>
+                    <i />
+                </div>
+                <div>
+                    <span>game modes</span>
+                    <i />
+                </div>
+                <div>
+                    <span>shared systems</span>
+                    <i />
+                </div>
             </div>
         </div>
     )
@@ -340,13 +418,26 @@ function PlatformArt() {
 function TerminalArt() {
     return (
         <div className="terminal-visual">
-            <div className="terminal-top"><span>runtime / secure</span><i /></div>
-            <div className="terminal-lines">
-                <p><b>01</b> checking boundary <strong>ok</strong></p>
-                <p><b>02</b> loading policy engine <strong>ok</strong></p>
-                <p><b>03</b> opening operator surface <strong>ok</strong></p>
+            <div className="terminal-top">
+                <span>runtime / secure</span>
+                <i />
             </div>
-            <div className="terminal-big">SHIP<br /><em>THE FIX</em></div>
+            <div className="terminal-lines">
+                <p>
+                    <b>01</b> checking boundary <strong>ok</strong>
+                </p>
+                <p>
+                    <b>02</b> loading policy engine <strong>ok</strong>
+                </p>
+                <p>
+                    <b>03</b> opening operator surface <strong>ok</strong>
+                </p>
+            </div>
+            <div className="terminal-big">
+                SHIP
+                <br />
+                <em>THE FIX</em>
+            </div>
             <Terminal className="terminal-icon" />
         </div>
     )

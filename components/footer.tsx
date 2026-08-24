@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { cacheLife } from 'next/cache'
 import { cn } from '@/lib/utils'
 import { SiX, SiYoutube, SiDiscord, SiGithub } from '@icons-pack/react-simple-icons'
 import { Mail, MapPin, Clock } from 'lucide-react'
@@ -103,7 +104,16 @@ const contactInfo = [
     }
 ]
 
-export default function Footer() {
+async function getCurrentYear() {
+    'use cache'
+    cacheLife('days')
+
+    return new Date().getFullYear()
+}
+
+export default async function Footer() {
+    const currentYear = await getCurrentYear()
+
     return (
         <footer className="relative bg-background border-t">
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
@@ -118,6 +128,7 @@ export default function Footer() {
                                     alt="MikArt Europe"
                                     width={200}
                                     height={55}
+                                    sizes="200px"
                                     className="h-12 w-auto rounded"
                                 />
                             </Link>
@@ -195,7 +206,7 @@ export default function Footer() {
                 <div className="mx-auto max-w-7xl px-4 mx-auto px-6 py-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div className="text-sm text-muted-foreground">
-                            © {new Date().getFullYear()} MikArt Europe. All rights reserved.
+                            © {currentYear} MikArt Europe. All rights reserved.
                         </div>
 
                         <div className="flex items-center gap-6 text-xs text-muted-foreground">

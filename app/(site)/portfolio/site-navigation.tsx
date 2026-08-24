@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ease } from './home-data'
-import Image from "next/image";
+import Image from 'next/image'
 
 export function SiteNavigation({
     menuOpen,
@@ -27,9 +27,18 @@ export function SiteNavigation({
 
     return (
         <>
-            <header className="site-nav">
-                <Link className="site-brand" href="/" aria-label="MikArt Europe home">
-                    <Image className="w-8 brightness-0 invert" src="/logo.svg" alt="logo" width={64} height={64} />
+            <header className="site-nav" style={{ viewTransitionName: 'site-header' }}>
+                <Link className="site-brand" href="/" aria-label="MikArt Europe home" transitionTypes={['nav-back']}>
+                    <Image
+                        className="w-8 brightness-0 invert"
+                        src="/logo.svg"
+                        alt="MikArt logo"
+                        width={64}
+                        height={64}
+                        sizes="2rem"
+                        loading="eager"
+                        fetchPriority="high"
+                    />
                     <span>
                         <strong>MikArt</strong>
                         <small>Europe</small>
@@ -37,7 +46,9 @@ export function SiteNavigation({
                 </Link>
                 <nav className="site-nav-links" aria-label="Primary navigation">
                     <Link href="#work">Work</Link>
-                    <Link href="/blog">Blog</Link>
+                    <Link href="/blog" transitionTypes={['nav-forward']}>
+                        Blog
+                    </Link>
                     <button type="button" onClick={() => setMenuOpen(true)} aria-label="Open navigation menu">
                         Explore <Menu size={17} />
                     </button>
@@ -54,14 +65,24 @@ export function SiteNavigation({
                         transition={{ duration: reducedMotion ? 0 : 0.65, ease }}
                         aria-hidden={!menuOpen}
                     >
-                        <button className="menu-close" type="button" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                        <button
+                            className="menu-close"
+                            type="button"
+                            onClick={() => setMenuOpen(false)}
+                            aria-label="Close menu"
+                        >
                             <X size={19} />
                         </button>
                         <div className="menu-inner">
                             <p className="menu-kicker">Menu</p>
                             <nav className="menu-links" aria-label="Section navigation">
                                 {links.map(([number, label, href]) => (
-                                    <Link href={href} key={href} onClick={() => setMenuOpen(false)}>
+                                    <Link
+                                        href={href}
+                                        key={href}
+                                        onClick={() => setMenuOpen(false)}
+                                        transitionTypes={href.startsWith('/') ? ['nav-forward'] : undefined}
+                                    >
                                         <small>{number}</small>
                                         <span>{label}</span>
                                         <ArrowUpRight />

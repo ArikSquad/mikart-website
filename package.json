@@ -4,11 +4,11 @@
     "private": true,
     "scripts": {
         "prettier": "prettier --write .",
-        "dev": "next --webpack",
+        "dev": "next dev",
         "build": "next build",
         "postinstall": "fumadocs-mdx",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "eslint ."
     },
     "homepage": "https://www.mikart.eu",
     "dependencies": {
@@ -40,7 +40,7 @@
         "convex": "^1.45.0",
         "date-fns": "^4.4.0",
         "embla-carousel-react": "^8.6.0",
-        "eslint": "10.9.0",
+        "eslint": "9.25.1",
         "eslint-config-next": "16.3.2",
         "framer-motion": "^13.1.1",
         "fumadocs-core": "^16.15.1",

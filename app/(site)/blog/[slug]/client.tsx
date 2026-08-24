@@ -22,7 +22,10 @@ import { toast } from 'sonner'
 
 function BlogHeader() {
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm">
+        <header
+            className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm"
+            style={{ viewTransitionName: 'site-header' }}
+        >
             <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/80" />
             <div className="mx-auto max-w-7xl px-4 relative z-10">
                 <div className="flex h-20 items-center justify-between py-6">
@@ -125,6 +128,7 @@ export default function PostPage() {
                 <div className="mx-auto max-w-4xl px-4 pt-28 pb-12 relative">
                     <Link
                         href="/blog"
+                        transitionTypes={['nav-back']}
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'sm' }),
                             'mb-8 -ml-2 text-muted-foreground hover:text-foreground'
@@ -170,6 +174,7 @@ export default function PostPage() {
                         {author && (
                             <Link
                                 href={`/profile/${author.clerkId}`}
+                                transitionTypes={['nav-forward']}
                                 className="flex items-center gap-2 hover:text-foreground transition-colors group"
                             >
                                 <Avatar className="h-10 w-10 ring-2 ring-background shadow-sm group-hover:ring-primary/20 transition-all">
@@ -237,7 +242,11 @@ export default function PostPage() {
                 <Separator className="my-12" />
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <Link href="/blog" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
+                    <Link
+                        href="/blog"
+                        transitionTypes={['nav-back']}
+                        className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+                    >
                         <ChevronLeft className="mr-2 h-4 w-4" />
                         Back to all posts
                     </Link>
@@ -261,7 +270,10 @@ export default function PostPage() {
 function PostPageSkeleton() {
     return (
         <div className="bg-background min-h-screen">
-            <header className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm">
+            <header
+                className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-border/10 shadow-sm"
+                style={{ viewTransitionName: 'site-header' }}
+            >
                 <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/80" />
                 <div className="mx-auto max-w-7xl px-4 relative z-10">
                     <div className="flex h-20 items-center justify-between py-6">

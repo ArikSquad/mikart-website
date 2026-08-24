@@ -1,4 +1,5 @@
 import { source } from '@/lib/source'
+import { PageTransition } from '@/components/page-transition'
 import { DocsBody, DocsDescription, DocsPage, DocsTitle, PageLastUpdate } from 'fumadocs-ui/page'
 import { notFound } from 'next/navigation'
 import { getMDXComponents } from '@/components/mdx'
@@ -13,30 +14,30 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
     const { body: Mdx, toc, lastModified } = await page.data.load()
 
     return (
-        <DocsPage
-            toc={toc}
-            lastUpdate={lastModified ? new Date(lastModified) : undefined}
-            full={page.data.full}
-            tableOfContent={{
-                style: 'clerk'
-            }}
-        >
-            <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
-            <p className="text-muted-foreground">
-                {page.data.description}
-            </p>
-            <div className="flex flex-row gap-2 items-center border-b pb-6">
-                <MarkdownCopyButton markdownUrl={`${page.url}.mdx`} />
-                <ViewOptionsPopover
-                    markdownUrl={`${page.url}.mdx`}
-                    githubUrl={`https://github.com/MikArt-Europe/website/blob/main/apps/docs/content/docs/${page.path}`}
-                />
-            </div>
-            <DocsBody>
-                <Mdx components={getMDXComponents()} />
-            </DocsBody>
-            {lastModified && <PageLastUpdate date={lastModified} />}
-        </DocsPage>
+        <PageTransition>
+            <DocsPage
+                toc={toc}
+                lastUpdate={lastModified ? new Date(lastModified) : undefined}
+                full={page.data.full}
+                tableOfContent={{
+                    style: 'clerk'
+                }}
+            >
+                <h1 className="text-[1.75em] font-semibold">{page.data.title}</h1>
+                <p className="text-muted-foreground">{page.data.description}</p>
+                <div className="flex flex-row gap-2 items-center border-b pb-6">
+                    <MarkdownCopyButton markdownUrl={`${page.url}.mdx`} />
+                    <ViewOptionsPopover
+                        markdownUrl={`${page.url}.mdx`}
+                        githubUrl={`https://github.com/MikArt-Europe/website/blob/main/apps/docs/content/docs/${page.path}`}
+                    />
+                </div>
+                <DocsBody>
+                    <Mdx components={getMDXComponents()} />
+                </DocsBody>
+                {lastModified && <PageLastUpdate date={lastModified} />}
+            </DocsPage>
+        </PageTransition>
     )
 }
 

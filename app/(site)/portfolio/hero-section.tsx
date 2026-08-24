@@ -29,10 +29,15 @@ export function HeroSection({ reducedMotion }: { reducedMotion: boolean | null }
                         platforms, security software, and the tools around communities.
                     </p>
                     <div className="hero-actions">
-                        <Link className="button button-primary" href="/blog">
+                        <Link className="button button-primary" href="/blog" transitionTypes={['nav-forward']}>
                             Blog <ArrowUpRight size={16} />
                         </Link>
-                        <Link className="button button-quiet" href="https://github.com/ariksquad" target="_blank" rel="noreferrer">
+                        <Link
+                            className="button button-quiet"
+                            href="https://github.com/ariksquad"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             GitHub <SiGithub size={15} />
                         </Link>
                     </div>
@@ -64,7 +69,9 @@ export function HeroSection({ reducedMotion }: { reducedMotion: boolean | null }
             <div className="hero-proofline">
                 <span>Java / Rust / TypeScript / C++</span>
                 <span>Finland / Europe</span>
-                <Link href="#work">Work <ArrowUpRight size={15} /></Link>
+                <Link href="#work">
+                    Work <ArrowUpRight size={15} />
+                </Link>
             </div>
         </section>
     )

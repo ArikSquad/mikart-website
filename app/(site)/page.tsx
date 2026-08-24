@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { PageTransition } from '@/components/page-transition'
 import { PortfolioPage } from './portfolio/portfolio-page'
 import './portfolio/portfolio.css'
 
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-    return <PortfolioPage />
+    return (
+        <PageTransition>
+            <PortfolioPage />
+        </PageTransition>
+    )
 }
