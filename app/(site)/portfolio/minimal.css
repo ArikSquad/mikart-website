@@ -1,0 +1,324 @@
+.minimal-portfolio {
+    --minimal-background: #141414;
+    --minimal-foreground: #d7d4ce;
+    --minimal-muted: #817e78;
+    --minimal-line: #33322f;
+    min-height: 100svh;
+    color: var(--minimal-foreground);
+    background: var(--minimal-background);
+    font-family: var(--font-sans), var(--font-geist-mono), monospace;
+    font-size: 14px;
+    letter-spacing: -0.015em;
+}
+
+.minimal-portfolio *,
+.minimal-portfolio *::before,
+.minimal-portfolio *::after {
+    box-sizing: border-box;
+}
+
+.minimal-portfolio a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.minimal-page {
+    display: flex;
+    width: min(calc(100% - 48px), 760px);
+    min-height: 100svh;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: clamp(76px, 15vh, 158px) 0 34px;
+}
+
+.minimal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.minimal-header-actions {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+}
+
+.minimal-name,
+.minimal-role,
+.minimal-intro p,
+.minimal-section-label,
+.minimal-work-row,
+.minimal-links,
+.minimal-footer {
+    margin: 0;
+}
+
+.minimal-name {
+    color: var(--minimal-foreground);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.minimal-role {
+    margin-top: 10px;
+    color: var(--minimal-muted);
+    line-height: 1.25;
+}
+
+.minimal-header-link {
+    padding: 1px 0 4px;
+    color: var(--minimal-muted) !important;
+    border-bottom: 1px solid var(--minimal-line);
+    font-size: 12px;
+    line-height: 1;
+    transition:
+        color 160ms ease,
+        border-color 160ms ease;
+}
+
+.minimal-header-link:hover,
+.minimal-header-link:focus-visible {
+    color: var(--minimal-foreground) !important;
+    border-color: var(--minimal-foreground);
+}
+
+.minimal-intro {
+    max-width: 620px;
+    margin-top: clamp(84px, 11vh, 126px);
+}
+
+.minimal-intro p {
+    color: var(--minimal-foreground);
+    font-size: clamp(14px, 1.55vw, 16px);
+    line-height: 1.62;
+}
+
+.minimal-intro strong {
+    font-weight: 700;
+}
+
+.minimal-maximal-link {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.minimal-intro a,
+.minimal-footer a {
+    color: var(--minimal-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--minimal-line);
+    text-underline-offset: 5px;
+    transition:
+        color 160ms ease,
+        text-decoration-color 160ms ease;
+}
+
+.minimal-intro a:hover,
+.minimal-intro a:focus-visible,
+.minimal-footer a:hover,
+.minimal-footer a:focus-visible {
+    color: var(--minimal-foreground);
+    text-decoration-color: var(--minimal-foreground);
+}
+
+.minimal-work {
+    margin-top: clamp(78px, 10vh, 116px);
+}
+
+.minimal-section-label {
+    color: var(--minimal-muted);
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.minimal-work-list {
+    margin-top: 22px;
+}
+
+.minimal-work-row {
+    display: grid;
+    grid-template-columns: 56px minmax(112px, 0.34fr) minmax(0, 1fr);
+    gap: 0;
+    align-items: baseline;
+    padding: 8px 0;
+    color: var(--minimal-muted);
+    line-height: 1.4;
+    transition: color 160ms ease;
+}
+
+.minimal-work-year {
+    color: #6e6b66;
+}
+
+.minimal-work-name {
+    color: var(--minimal-foreground);
+    font-weight: 500;
+    transition: color 160ms ease;
+}
+
+.minimal-work-description {
+    color: var(--minimal-muted);
+}
+
+.minimal-work-row:hover,
+.minimal-work-row:focus-visible {
+    color: var(--minimal-foreground);
+}
+
+.minimal-work-row:hover .minimal-work-name,
+.minimal-work-row:focus-visible .minimal-work-name {
+    color: #ffffff;
+}
+
+.minimal-work-row:focus-visible,
+.minimal-links a:focus-visible,
+.minimal-header-link:focus-visible,
+.minimal-footer a:focus-visible {
+    outline: 1px solid var(--minimal-muted);
+    outline-offset: 6px;
+}
+
+.minimal-elsewhere {
+    margin-top: clamp(82px, 11vh, 132px);
+}
+
+.minimal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 26px;
+    margin-top: 24px;
+    color: var(--minimal-muted);
+    line-height: 1.4;
+}
+
+.minimal-links a {
+    border-bottom: 1px solid var(--minimal-line);
+    transition:
+        color 160ms ease,
+        border-color 160ms ease;
+}
+
+.minimal-links a:hover,
+.minimal-links a:focus-visible {
+    color: var(--minimal-foreground);
+    border-color: var(--minimal-foreground);
+}
+
+.minimal-footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 28px;
+    margin-top: auto;
+    padding-top: clamp(76px, 12vh, 136px);
+    color: var(--minimal-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.minimal-footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    align-items: baseline;
+}
+
+.minimal-footer-meta a {
+    color: var(--minimal-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--minimal-line);
+    text-underline-offset: 5px;
+    transition:
+        color 160ms ease,
+        text-decoration-color 160ms ease;
+}
+
+.minimal-footer-meta a:hover,
+.minimal-footer-meta a:focus-visible {
+    color: var(--minimal-foreground);
+    text-decoration-color: var(--minimal-foreground);
+}
+
+@media (max-width: 620px) {
+    .minimal-page {
+        width: min(calc(100% - 36px), 560px);
+        padding-top: 62px;
+    }
+
+    .minimal-intro {
+        margin-top: 74px;
+    }
+
+    .minimal-work {
+        margin-top: 72px;
+    }
+
+    .minimal-work-row {
+        grid-template-columns: 50px minmax(100px, 0.55fr) minmax(0, 1fr);
+        font-size: 12px;
+    }
+
+    .minimal-elsewhere {
+        margin-top: 74px;
+    }
+
+    .minimal-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 24px;
+        padding-top: 86px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 440px) {
+    .minimal-page {
+        width: min(calc(100% - 32px), 560px);
+    }
+
+    .minimal-header {
+        gap: 18px;
+    }
+
+    .minimal-header-actions {
+        gap: 12px;
+    }
+
+    .minimal-header-link {
+        font-size: 11px;
+    }
+
+    .minimal-work-row {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 2px 10px;
+        padding: 9px 0;
+    }
+
+    .minimal-work-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .minimal-work-description {
+        grid-column: 2;
+        line-height: 1.45;
+    }
+
+    .minimal-links {
+        gap: 15px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .minimal-portfolio *,
+    .minimal-portfolio *::before,
+    .minimal-portfolio *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import {
     ArrowUpRight,
     Braces,
@@ -21,7 +22,7 @@ import { HeroSection } from './hero-section'
 import { RevealOnScroll } from './reveal'
 import { SiteNavigation } from './site-navigation'
 
-export function PortfolioPage() {
+export function PortfolioPage({ styleControl }: { styleControl?: ReactNode }) {
     const [time, setTime] = useState('')
     const [currentYear, setCurrentYear] = useState<number | null>(null)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -327,6 +328,7 @@ export function PortfolioPage() {
                     <span>Finland / {time}</span>
                     <a href="#top">Back to top ↑</a>
                 </div>
+                {styleControl && <div className="footer-style">{styleControl}</div>}
             </footer>
 
             {copied && (

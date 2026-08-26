@@ -1,0 +1,87 @@
+.landing-experience {
+    --style-foreground: #f1f0e8;
+    --style-muted: #899285;
+    min-height: 100svh;
+}
+
+.landing-style-minimal {
+    --style-foreground: #d7d4ce;
+    --style-muted: #817e78;
+}
+
+.landing-view {
+    min-height: 100svh;
+}
+
+/* The style choice lives in each page's footer, so it never follows the reader. */
+.style-switcher {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    color: var(--style-muted);
+    font:
+        10px/1 var(--font-sans),
+        var(--font-geist-mono),
+        monospace;
+    letter-spacing: 0.02em;
+}
+
+.style-switcher-options {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.style-switcher-option-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.style-switcher-divider {
+    color: color-mix(in srgb, var(--style-muted) 55%, transparent);
+}
+
+.style-switcher-option {
+    padding: 0 0 4px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    color: var(--style-muted);
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    letter-spacing: inherit;
+    transition:
+        color 180ms ease,
+        border-color 180ms ease;
+}
+
+.style-switcher-option:hover,
+.style-switcher-option:focus-visible,
+.style-switcher-option.is-selected {
+    color: var(--style-foreground);
+    border-bottom-color: currentColor;
+}
+
+.style-switcher-option:focus-visible {
+    outline: 1px solid var(--style-foreground);
+    outline-offset: 5px;
+}
+
+.footer-style {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+}
+
+@media (max-width: 620px) {
+    .footer-style {
+        justify-content: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .style-switcher-option {
+        transition-duration: 0.01ms !important;
+    }
+}

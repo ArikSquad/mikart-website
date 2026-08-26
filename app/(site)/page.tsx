@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { PageTransition } from '@/components/page-transition'
-import { PortfolioPage } from './portfolio/portfolio-page'
+import { LandingExperience } from './portfolio/landing-style'
+import './portfolio/landing-style.css'
+import './portfolio/minimal.css'
 import './portfolio/portfolio.css'
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         <PageTransition>
-            <PortfolioPage />
+            <LandingExperience />
         </PageTransition>
     )
 }
