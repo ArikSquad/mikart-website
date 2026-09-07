@@ -12,8 +12,7 @@ import { PlateRenderer } from '@/components/blog/plate-renderer'
 import { CommentSection } from '@/components/blog/comment-section'
 import { BlogHeader } from '../blog-header'
 
-const textLink =
-    'border-b border-[#343330] pb-1 text-[#97938c] transition-colors hover:border-current hover:text-[#e4e2de] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#97938c]'
+const textLink = 'text-[#97938c] transition-colors hover:text-[#e4e2de] focus-visible:outline-none'
 
 function countWords(value: unknown): number {
     if (Array.isArray(value)) return value.reduce((total, item) => total + countWords(item), 0)
@@ -67,26 +66,23 @@ export default function PostPage() {
     return (
         <main className="min-h-svh bg-[#111111] font-mono text-sm tracking-[-0.015em] text-[#e4e2de]">
             <BlogHeader />
-            <div className="mx-auto w-full max-w-[808px] px-4 sm:px-6">
-                <Link href="/blog" className={`${textLink} mt-14 inline-block text-xs`} transitionTypes={['nav-back']}>
+            <div className="mx-auto w-full max-w-[808px] px-5 sm:px-8">
+                <Link
+                    href="/blog"
+                    className={`${textLink} mt-8 inline-block text-xs sm:mt-12`}
+                    transitionTypes={['nav-back']}
+                >
                     ← all notes
                 </Link>
 
-                <header className="border-b border-[#343330] py-[clamp(4.375rem,10vw,7rem)] pb-14">
-                    {post.tags?.length ? (
-                        <div className="mb-5 flex flex-wrap gap-x-4 gap-y-2 text-[10px] tracking-[0.06em] text-[#97938c] uppercase">
-                            {post.tags.map((tag) => (
-                                <span key={tag}>#{tag}</span>
-                            ))}
-                        </div>
-                    ) : null}
+                <header className="pt-14 pb-12 sm:pt-24 sm:pb-20">
                     <h1 className="text-[clamp(2.125rem,6vw,3.625rem)] leading-[1.04] font-medium tracking-[-0.055em]">
                         {post.title}
                     </h1>
                     {post.description && (
                         <p className="mt-6 max-w-[650px] text-base leading-[1.55] text-[#97938c]">{post.description}</p>
                     )}
-                    <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-[11px] text-[#97938c]">
+                    <div className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-2 text-[11px] text-[#77736d] sm:mt-8">
                         {post.author && (
                             <Link
                                 className="hover:text-[#e4e2de]"
@@ -96,12 +92,14 @@ export default function PostPage() {
                                 {post.author.name}
                             </Link>
                         )}
+                        {post.author && <span aria-hidden="true">·</span>}
                         <time dateTime={new Date(post.createdAt).toISOString()}>
                             {formatDate(new Date(post.createdAt).toISOString())}
                         </time>
+                        <span aria-hidden="true">·</span>
                         <span>{readingTime} min read</span>
                         <button
-                            className={`${textLink} ml-auto cursor-pointer bg-transparent max-[620px]:mt-2 max-[620px]:ml-0 max-[620px]:w-full max-[620px]:text-left`}
+                            className={`${textLink} ml-auto cursor-pointer bg-transparent max-[440px]:mt-3 max-[440px]:ml-0 max-[440px]:w-full max-[440px]:text-left`}
                             type="button"
                             onClick={sharePost}
                         >
@@ -109,7 +107,7 @@ export default function PostPage() {
                         </button>
                     </div>
                     {post.followupUrl && (
-                        <p className="mt-8 border-y border-[#343330] py-4 text-[#97938c]">
+                        <p className="mt-8 rounded-xl bg-[#181818] px-4 py-3.5 text-[#97938c]">
                             This note has an update.{' '}
                             <a
                                 className="text-[#e4e2de] underline underline-offset-4"
@@ -123,12 +121,12 @@ export default function PostPage() {
                     )}
                 </header>
 
-                <article className="py-14 pb-24">
+                <article className="pt-6 pb-24 sm:pt-10">
                     <PlateRenderer
                         content={post.content}
                         className="prose-base font-sans leading-[1.78] prose-headings:scroll-mt-24 prose-headings:font-mono prose-headings:font-medium prose-headings:tracking-[-0.035em] prose-a:text-[#e4e2de] prose-a:underline prose-a:decoration-[#97938c] prose-a:underline-offset-4 prose-code:rounded-none prose-pre:rounded-none"
                     />
-                    <div className="mt-16 flex justify-between gap-5 border-t border-[#343330] pt-5 text-xs text-[#97938c]">
+                    <div className="mt-16 flex justify-between gap-5 text-xs text-[#97938c]">
                         <Link className="hover:text-[#e4e2de]" href="/blog" transitionTypes={['nav-back']}>
                             ← all notes
                         </Link>
@@ -155,13 +153,13 @@ function PostPageSkeleton() {
     return (
         <main className="min-h-svh bg-[#111111] font-mono text-[#e4e2de]">
             <BlogHeader />
-            <div className="mx-auto w-full max-w-[808px] px-4 sm:px-6" aria-busy="true" aria-label="Loading blog post">
-                <div className="mt-14 h-4 w-24 animate-pulse bg-[#1a1a19]" />
-                <div className="border-b border-[#343330] py-20">
-                    <div className="h-48 animate-pulse bg-[#171717]" />
+            <div className="mx-auto w-full max-w-[808px] px-5 sm:px-8" aria-busy="true" aria-label="Loading blog post">
+                <div className="mt-8 h-4 w-24 animate-pulse rounded bg-[#1a1a19] sm:mt-12" />
+                <div className="pt-14 pb-12 sm:pt-24 sm:pb-20">
+                    <div className="h-48 animate-pulse rounded-2xl bg-[#171717]" />
                 </div>
-                <div className="py-14">
-                    <div className="h-80 animate-pulse bg-[#171717]" />
+                <div className="pt-6 pb-24">
+                    <div className="h-80 animate-pulse rounded-2xl bg-[#171717]" />
                 </div>
             </div>
         </main>
