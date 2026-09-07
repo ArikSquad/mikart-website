@@ -3,8 +3,8 @@ import { PageTransition } from '@/components/page-transition'
 import BlogPage from '@/app/(site)/blog/client'
 
 export const metadata: Metadata = {
-    title: 'Blog',
-    description: 'Discover insights, tutorials, and thoughts on development, design, and the latest in technology.'
+    title: 'Notes — ArikSquad',
+    description: 'Notes on software, infrastructure, security, and building systems that are easier to operate.'
 }
 
 export default function BlogPageServer() {
