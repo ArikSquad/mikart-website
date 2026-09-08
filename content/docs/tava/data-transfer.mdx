@@ -34,13 +34,13 @@ try (
 
 Default options:
 
-| Option | Default |
-| --- | --- |
-| Batch size | `500` |
-| Apply target schema | `true` |
-| Allow lossy schema changes | `false` |
-| Transform | identity |
-| Progress listener | no-op |
+| Option                     | Default  |
+| -------------------------- | -------- |
+| Batch size                 | `500`    |
+| Apply target schema        | `true`   |
+| Allow lossy schema changes | `false`  |
+| Transform                  | identity |
+| Progress listener          | no-op    |
 
 ## Configure Options
 
@@ -102,6 +102,6 @@ If an insert fails, copying stops and the report is returned with `complete() ==
 Counts include the records successfully inserted before the failure.
 
 <Callout type="warn" title="Transfers are application work">
-Tava handles paging and target inserts, but it does not replace backup, restore, CDC,
-or online migration tooling. Use it when you want a schema-aware application-level copy.
+    Tava handles paging and target inserts, but it does not replace backup, restore, CDC, or online migration tooling.
+    Use it when you want a schema-aware application-level copy.
 </Callout>

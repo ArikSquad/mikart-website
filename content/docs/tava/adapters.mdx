@@ -10,16 +10,16 @@ backend-specific.
 
 ## Modules
 
-| Module | Backend |
-| --- | --- |
-| `tava-postgres` | PostgreSQL and compatible JDBC endpoints |
-| `tava-mysql` | MySQL and MariaDB |
-| `tava-sqlite` | SQLite files and shared in-memory databases |
-| `tava-h2` | H2, mainly useful for tests and local tools |
-| `tava-sqlserver` | Microsoft SQL Server |
-| `tava-oracle` | Oracle Database |
-| `tava-mongodb` | MongoDB sync driver |
-| `tava-dynamodb` | AWS SDK DynamoDB client |
+| Module           | Backend                                     |
+| ---------------- | ------------------------------------------- |
+| `tava-postgres`  | PostgreSQL and compatible JDBC endpoints    |
+| `tava-mysql`     | MySQL and MariaDB                           |
+| `tava-sqlite`    | SQLite files and shared in-memory databases |
+| `tava-h2`        | H2, mainly useful for tests and local tools |
+| `tava-sqlserver` | Microsoft SQL Server                        |
+| `tava-oracle`    | Oracle Database                             |
+| `tava-mongodb`   | MongoDB sync driver                         |
+| `tava-dynamodb`  | AWS SDK DynamoDB client                     |
 
 ## JDBC Adapters
 
@@ -153,12 +153,12 @@ record Device(
 
 Adapters choose sensible native defaults for logical types. A few examples:
 
-| Logical type | PostgreSQL | MySQL | SQLite | SQL Server | Oracle |
-| --- | --- | --- | --- | --- | --- |
-| `UUID` | `UUID` | adapter default | `TEXT` | `UNIQUEIDENTIFIER` | `VARCHAR2(36)` |
-| `JSON` | `JSONB` | `JSON` | `TEXT` | `NVARCHAR(MAX)` | `CLOB` |
-| `BINARY` | `BYTEA` | `LONGBLOB` | `BLOB` | `VARBINARY(MAX)` | `BLOB` |
-| `INSTANT` | `TIMESTAMP WITH TIME ZONE` | adapter default | `TEXT` | `DATETIMEOFFSET` | `TIMESTAMP WITH TIME ZONE` |
+| Logical type | PostgreSQL                 | MySQL           | SQLite | SQL Server         | Oracle                     |
+| ------------ | -------------------------- | --------------- | ------ | ------------------ | -------------------------- |
+| `UUID`       | `UUID`                     | adapter default | `TEXT` | `UNIQUEIDENTIFIER` | `VARCHAR2(36)`             |
+| `JSON`       | `JSONB`                    | `JSON`          | `TEXT` | `NVARCHAR(MAX)`    | `CLOB`                     |
+| `BINARY`     | `BYTEA`                    | `LONGBLOB`      | `BLOB` | `VARBINARY(MAX)`   | `BLOB`                     |
+| `INSTANT`    | `TIMESTAMP WITH TIME ZONE` | adapter default | `TEXT` | `DATETIMEOFFSET`   | `TIMESTAMP WITH TIME ZONE` |
 
 Use typed adapter annotations when the default is not the storage shape you want.
 
@@ -171,6 +171,6 @@ record AuditEvent(
 ```
 
 <Callout type="idea" title="Managed services">
-Managed databases that expose the same protocol use the same adapter. For example,
-a managed PostgreSQL endpoint still uses `tava-postgres`.
+    Managed databases that expose the same protocol use the same adapter. For example, a managed PostgreSQL endpoint
+    still uses `tava-postgres`.
 </Callout>

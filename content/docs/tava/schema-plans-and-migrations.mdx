@@ -21,12 +21,12 @@ plan.apply();
 
 ## Risk Levels
 
-| Risk | Default behavior |
-| --- | --- |
-| `SAFE` | Applies with `plan.apply()` |
-| `LOSSY` | Requires `new ApplyOptions(true, false)` |
+| Risk          | Default behavior                                       |
+| ------------- | ------------------------------------------------------ |
+| `SAFE`        | Applies with `plan.apply()`                            |
+| `LOSSY`       | Requires `new ApplyOptions(true, false)`               |
 | `DESTRUCTIVE` | Requires `new ApplyOptions(false, true)` or both flags |
-| `UNSUPPORTED` | Never applies |
+| `UNSUPPORTED` | Never applies                                          |
 
 ```java title="ApplyOptions.java"
 import eu.mikart.tava.schema.plan.ApplyOptions;
@@ -37,8 +37,7 @@ plan.apply(new ApplyOptions(true, true));   // allow lossy and destructive
 ```
 
 <Callout type="warn" title="Loss is explicit">
-The default path is safe. If a change can discard data or remove storage, the caller
-has to say so in code.
+    The default path is safe. If a change can discard data or remove storage, the caller has to say so in code.
 </Callout>
 
 ## One-Off Migrations
@@ -109,10 +108,10 @@ List<Migration> pending = tava.migrations().pending(allMigrations);
 ```
 
 <Cards>
-  <Card href="schema" title="Schema">
-    Revisit logical types, generated values, and adapter settings.
-  </Card>
-  <Card href="data-transfer" title="Data transfer">
-    Copy records between adapters after planning the target schema.
-  </Card>
+    <Card href="schema" title="Schema">
+        Revisit logical types, generated values, and adapter settings.
+    </Card>
+    <Card href="data-transfer" title="Data transfer">
+        Copy records between adapters after planning the target schema.
+    </Card>
 </Cards>

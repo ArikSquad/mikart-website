@@ -72,7 +72,7 @@ export default function PostPage() {
                     className={`${textLink} mt-8 inline-block text-xs sm:mt-12`}
                     transitionTypes={['nav-back']}
                 >
-                    ← all notes
+                    ← all posts
                 </Link>
 
                 <header className="pt-14 pb-12 sm:pt-24 sm:pb-20">
@@ -128,7 +128,7 @@ export default function PostPage() {
                     />
                     <div className="mt-16 flex justify-between gap-5 text-xs text-[#97938c]">
                         <Link className="hover:text-[#e4e2de]" href="/blog" transitionTypes={['nav-back']}>
-                            ← all notes
+                            ← all posts
                         </Link>
                         <button
                             className="cursor-pointer bg-transparent hover:text-[#e4e2de]"
