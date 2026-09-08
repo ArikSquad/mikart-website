@@ -1,15 +1,16 @@
 export default function BlogLoading() {
     return (
-        <div className="min-h-screen bg-background" aria-busy="true" aria-label="Loading blog">
-            <div className="mx-auto max-w-7xl px-4 pt-32 pb-16 text-center">
-                <div className="mx-auto h-14 w-64 animate-pulse rounded-lg bg-muted" />
-                <div className="mx-auto mt-6 h-6 max-w-2xl animate-pulse rounded-lg bg-muted" />
+        <main className="min-h-svh bg-[#111111] font-mono text-[#e4e2de]" aria-busy="true" aria-label="Loading posts">
+            <div className="mx-auto w-full max-w-257 px-5 sm:px-8">
+                <div className="max-w-190 pt-14 pb-20 sm:pt-24 sm:pb-28">
+                    <div className="h-48 animate-pulse rounded-2xl bg-[#171717]" />
+                </div>
+                <div className="space-y-2">
+                    {[0, 1, 2].map((index) => (
+                        <div key={index} className="h-40 animate-pulse rounded-2xl bg-[#171717]/60" />
+                    ))}
+                </div>
             </div>
-            <div className="mx-auto grid max-w-7xl gap-6 px-4 py-16 md:grid-cols-2 lg:grid-cols-3">
-                {[...Array(6)].map((_, index) => (
-                    <div key={index} className="h-56 animate-pulse rounded-2xl border border-border/50 bg-muted/50" />
-                ))}
-            </div>
-        </div>
+        </main>
     )
 }

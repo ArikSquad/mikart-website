@@ -6,10 +6,10 @@ icon: ListFilter
 
 The entity API has two layers:
 
-| Layer | Use it when |
-| --- | --- |
-| `Entity<T>` | You have a Java record type and want typed reads and writes |
-| `Records` | You need dynamic fields, transfers, migrations, or runtime schemas |
+| Layer       | Use it when                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `Entity<T>` | You have a Java record type and want typed reads and writes        |
+| `Records`   | You need dynamic fields, transfers, migrations, or runtime schemas |
 
 Both layers use the same query, predicate, mutation, and paging types.
 
@@ -67,16 +67,16 @@ Predicate named = Predicate.or(
 );
 ```
 
-| Predicate | Purpose |
-| --- | --- |
-| `all()` | Match every record |
-| `eq(field, value)` | Equality |
-| `ne(field, value)` | Inequality |
-| `lt`, `lte`, `gt`, `gte` | Ordered comparisons |
-| `in(field, values)` | Field is one of several values |
-| `contains(field, value)` | Backend-supported containment |
-| `startsWith(field, value)` | Prefix matching |
-| `and(...)`, `or(...)` | Junctions |
+| Predicate                  | Purpose                        |
+| -------------------------- | ------------------------------ |
+| `all()`                    | Match every record             |
+| `eq(field, value)`         | Equality                       |
+| `ne(field, value)`         | Inequality                     |
+| `lt`, `lte`, `gt`, `gte`   | Ordered comparisons            |
+| `in(field, values)`        | Field is one of several values |
+| `contains(field, value)`   | Backend-supported containment  |
+| `startsWith(field, value)` | Prefix matching                |
+| `and(...)`, `or(...)`      | Junctions                      |
 
 ## Sorting, Projection, And Limits
 
@@ -133,6 +133,6 @@ long deleted = accounts.delete(Predicate.eq("status", "disabled"));
 ```
 
 <Callout type="warn" title="Predicate scope matters">
-`update` and `delete` operate on every record matched by the predicate. Build admin
-workflows so broad predicates are deliberate and visible.
+    `update` and `delete` operate on every record matched by the predicate. Build admin workflows so broad predicates
+    are deliberate and visible.
 </Callout>

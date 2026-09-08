@@ -1,446 +1,219 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import {
-    ArrowUpRight,
-    Braces,
-    Check,
-    Database,
-    GitBranch,
-    Layers3,
-    Mail,
-    ShieldCheck,
-    Terminal,
-    Workflow
-} from 'lucide-react'
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
-import { capabilities, ease, helsinkiTime, projects, proofPoints, socials, type ProjectData } from './home-data'
-import { HeroSection } from './hero-section'
-import { RevealOnScroll } from './reveal'
-import { SiteNavigation } from './site-navigation'
+import { ArrowUpRight, Heart } from 'lucide-react'
+import { TechStackDialog } from './tech-stack-dialog'
+import { SiHearth } from '@icons-pack/react-simple-icons'
+import { ReactNode } from 'react'
+
+type Project = {
+    year: string
+    name: string
+    description: string
+    href?: string
+    external?: boolean
+}
+
+type WorkCategory = {
+    name: string
+    projects: Project[]
+}
+
+const workCategories: WorkCategory[] = [
+    {
+        name: 'software & systems',
+        projects: [
+            { year: '2026', name: 'tava', description: 'typed data layer for Java', href: '/docs/tava' },
+            {
+                year: '2026',
+                name: 'hypixel recreation',
+                description: 'contributed to a Minecraft server platform & microservices',
+                href: 'https://github.com/Swofty-Developments/HypixelRecreation',
+                external: true
+            }
+        ]
+    },
+    {
+        name: 'products & platforms',
+        projects: [
+            {
+                year: '2026',
+                name: 'salattu',
+                description: 'cross-platform password manager',
+                href: 'https://salattu.mikart.eu',
+                external: true
+            },
+            {
+                year: '2025',
+                name: 'ensave',
+                description: 'Discord community management platform',
+                href: 'https://ensave.mikart.eu',
+                external: true
+            },
+            {
+                year: '2025',
+                name: '[private project]',
+                description: 'worked on infra, proxies, etc to deploy a platform for 10k users'
+            }
+        ]
+    },
+    {
+        name: 'security',
+        projects: [
+            {
+                year: '2026',
+                name: 'bug bounties',
+                description: 'rewarded vulnerability research & disclosure'
+            }
+        ]
+    }
+] as const
+
+const secondaryLink =
+    'border-b border-[#343330] pb-1 text-[#97938c] transition-colors hover:border-[#e4e2de] hover:text-[#e4e2de] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#97938c]'
 
 export function PortfolioPage() {
-    const [time, setTime] = useState('')
-    const [currentYear, setCurrentYear] = useState<number | null>(null)
-    const [menuOpen, setMenuOpen] = useState(false)
-    const [copied, setCopied] = useState(false)
-    const [activeProject, setActiveProject] = useState(0)
-    const prefersReducedMotion = useReducedMotion()
-    const thresholdRef = useRef<HTMLElement>(null)
-    const { scrollYProgress } = useScroll()
-    const { scrollYProgress: thresholdProgress } = useScroll({
-        target: thresholdRef,
-        offset: ['start start', 'end end']
-    })
-    const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.25 })
-    const thresholdLineTargetX = useTransform(thresholdProgress, [0, 1], ['0vw', '-5vw'])
-    const thresholdLineX = useSpring(thresholdLineTargetX, { stiffness: 110, damping: 30, mass: 0.35 })
-    const thresholdColor = useTransform(thresholdProgress, [0, 0.5, 1], ['#151914', '#1d221b', '#202334'])
-
-    useEffect(() => {
-        const update = () => setTime(helsinkiTime())
-        update()
-        setCurrentYear(new Date().getFullYear())
-        const timer = window.setInterval(update, 30_000)
-        return () => window.clearInterval(timer)
-    }, [])
-
-    async function copyEmail() {
-        const email = 'ariksquad@mikart.eu'
-        try {
-            await navigator.clipboard.writeText(email)
-        } catch {
-            const fallback = document.createElement('textarea')
-            fallback.value = email
-            fallback.style.position = 'fixed'
-            fallback.style.opacity = '0'
-            document.body.appendChild(fallback)
-            fallback.select()
-            document.execCommand('copy')
-            fallback.remove()
-        }
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 1800)
-    }
-
-    const currentProject = projects[activeProject]
-
     return (
-        <main className="portfolio">
-            <motion.div className="page-progress" style={{ scaleX: progress }} aria-hidden="true" />
-            <SiteNavigation
-                menuOpen={menuOpen}
-                setMenuOpen={setMenuOpen}
-                time={time}
-                reducedMotion={prefersReducedMotion}
-            />
-            <HeroSection reducedMotion={prefersReducedMotion} />
+        <main id="top" className="min-h-svh bg-[#111111] font-mono text-sm tracking-[-0.015em] text-[#e4e2de]">
+            <div className="mx-auto flex min-h-svh w-full max-w-202 flex-col px-4 pt-[clamp(4.25rem,13vh,9.575rem)] pb-8 sm:px-6">
+                <header className="flex items-start justify-between gap-6 sm:gap-8">
+                    <div>
+                        <p className="m-0 text-base leading-none font-bold">artturi k.</p>
+                        <p className="mt-2.5 mb-0 leading-tight text-[#97938c]">software engineer — finland</p>
+                    </div>
+                    <div className="flex items-baseline gap-3 sm:gap-5">
+                        <TechStackDialog />
+                        <Link className={`${secondaryLink} text-xs`} href="/blog" transitionTypes={['nav-forward']}>
+                            blog
+                        </Link>
+                    </div>
+                </header>
 
-            <div className="signal-strip" aria-label="Areas of practice">
-                <div>
-                    {['Data infrastructure', 'Game platforms', 'Security software', 'Community tools'].map((item) => (
-                        <span key={item}>{item}</span>
+                <section className="mt-[clamp(5.25rem,8vh,7.875rem)] max-w-155" aria-labelledby="intro-title">
+                    <h1 id="intro-title" className="sr-only">
+                        Artturi, software engineer in Finland
+                    </h1>
+                    <p className="m-0 text-[clamp(0.875rem,1.55vw,1rem)] leading-[1.62]">
+                        I build <strong className="font-bold">reliable software and developer tools</strong>, with a
+                        focus on building something cool. I'm a Linux nerd. Based in Finland and working on{' '}
+                        <a className={secondaryLink} href="https://www.mikart.eu" target="_blank" rel="noreferrer">
+                            mikart europe
+                        </a>
+                        .
+                    </p>
+                </section>
+
+                <section className="mt-[clamp(4.875rem,6vh,7.25rem)]" id="work" aria-labelledby="work-title">
+                    <p id="work-title" className="m-0 text-[#97938c]">
+                        selected work
+                    </p>
+                    {workCategories.map((category) => (
+                        <div className="mt-8" key={category.name}>
+                            <h2 className="m-0 text-[11px] leading-none font-medium tracking-[0.08em] text-[#97938c] uppercase">
+                                {category.name}
+                            </h2>
+                            <div className="mt-2.5">
+                                {category.projects.map((work) => {
+                                    const S = ({ children }: { children: ReactNode }) =>
+                                        work.href ? (
+                                            <Link
+                                                className="group grid grid-cols-[42px_minmax(0,1fr)_14px] items-baseline gap-x-2.5 py-2 leading-[1.4] text-[#97938c] transition-colors hover:text-[#e4e2de] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#97938c] sm:grid-cols-[48px_minmax(110px,.48fr)_minmax(0,1fr)_14px] sm:gap-x-3"
+                                                href={work.href}
+                                                target={work.external ? '_blank' : undefined}
+                                                rel={work.external ? 'noreferrer' : undefined}
+                                                transitionTypes={!work.external ? ['nav-forward'] : undefined}
+                                            >
+                                                {children}
+                                            </Link>
+                                        ) : (
+                                            <span className="group grid grid-cols-[42px_minmax(0,1fr)_14px] items-baseline gap-x-2.5 py-2 leading-[1.4] text-[#97938c] transition-colors hover:text-[#e4e2de] sm:grid-cols-[48px_minmax(110px,.48fr)_minmax(0,1fr)_14px] sm:gap-x-3">
+                                                {children}
+                                            </span>
+                                        )
+                                    return (
+                                        <S key={work.name}>
+                                            <span className="text-xs text-[#6e6b66]">{work.year}</span>
+
+                                            <strong className="truncate font-medium text-[#e4e2de] group-hover:text-white">
+                                                {work.name}
+                                            </strong>
+
+                                            <span className="col-start-2 text-xs leading-[1.45] sm:col-auto sm:text-sm">
+                                                {work.description}
+                                            </span>
+
+                                            {work.href ? (
+                                                <ArrowUpRight
+                                                    className="col-start-3 row-start-1 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 sm:col-start-4"
+                                                    aria-hidden="true"
+                                                    size={13}
+                                                />
+                                            ) : null}
+                                        </S>
+                                    )
+                                })}
+                            </div>
+                        </div>
                     ))}
-                </div>
-            </div>
+                </section>
 
-            <section className="about-section" id="about">
-                <div className="about-grid">
-                    <RevealOnScroll>
-                        <h2>
-                            most of my work happens where software gets <em>complicated.</em>
-                        </h2>
-                    </RevealOnScroll>
-                    <div className="about-copy">
-                        <p>
-                            I like the places where feature implementation turns into a question about boundaries,
-                            scale, operators, or trust. That has led me from Java infrastructure and Minecraft platforms
-                            to Rust experiments, security products, and web tools people actually have to live with.
-                        </p>
-                        <Link
-                            className="underlined-link"
-                            href="https://github.com/ariksquad"
+                <section className="mt-[clamp(5.125rem,8vh,8.25rem)]" aria-labelledby="elsewhere-title">
+                    <p id="elsewhere-title" className="m-0 text-[#97938c]">
+                        elsewhere
+                    </p>
+                    <nav
+                        className="mt-6 flex flex-wrap gap-x-6 gap-y-4 leading-[1.4] text-[#97938c]"
+                        aria-label="Elsewhere"
+                    >
+                        <Link className={secondaryLink} href="/blog" transitionTypes={['nav-forward']}>
+                            blog
+                        </Link>
+                        <a className={secondaryLink} href="mailto:ariksquad@mikart.eu">
+                            ariksquad@mikart.eu
+                        </a>
+                        <a
+                            className={secondaryLink}
+                            href="https://github.com/ArikSquad"
                             target="_blank"
                             rel="noreferrer"
                         >
-                            Browse the open source trail <ArrowUpRight size={16} />
-                        </Link>
-                    </div>
-                </div>
-                <div className="proof-grid">
-                    {proofPoints.map((point) => (
-                        <div className="proof-card" key={point.label}>
-                            <strong>{point.value}</strong>
-                            <span>{point.label}</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <section className="threshold" id="approach" ref={thresholdRef}>
-                <motion.div className="threshold-sticky" style={{ backgroundColor: thresholdColor }}>
-                    <motion.p className="threshold-line" style={{ x: thresholdLineX }}>
-                        The next person should not have to guess
-                    </motion.p>
-                    <div className="threshold-copy">
-                        <h2>the version someone else inherits matters.</h2>
-                        <p>
-                            I care about the hour after I leave the room: when somebody else has to understand the
-                            model, find the edge, and make the next change.
-                        </p>
-                    </div>
-                    <div className="threshold-aside">
-                        <p>
-                            Good software does not need to explain itself loudly. It needs to leave fewer mysteries
-                            behind.
-                        </p>
-                    </div>
-                </motion.div>
-            </section>
-
-            <section className="work-section" id="work">
-                <div className="work-heading">
-                    <RevealOnScroll>
-                        <h2>
-                            things I
-                            <br />
-                            <em>built.</em>
-                        </h2>
-                    </RevealOnScroll>
-                    <p>These are the kinds of problems I keep returning to. Pick one if you want the details.</p>
-                </div>
-
-                <div className="project-browser">
-                    <div className="project-tabs" role="tablist" aria-label="Projects">
-                        {projects.map((project, index) => (
-                            <button
-                                key={project.name}
-                                type="button"
-                                role="tab"
-                                aria-selected={activeProject === index}
-                                className={activeProject === index ? 'is-active' : ''}
-                                onClick={() => setActiveProject(index)}
-                            >
-                                <span>{project.index}</span>
-                                <strong>{project.name}</strong>
-                                <small>{project.category}</small>
-                                <ArrowUpRight size={17} />
-                            </button>
-                        ))}
-                    </div>
-
-                    <motion.article
-                        className={`project-panel project-panel-${currentProject.theme}`}
-                        key={currentProject.name}
-                        role="tabpanel"
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.55, ease }}
-                    >
-                        <div className="project-panel-copy">
-                            <h3>{currentProject.strap}</h3>
-                            <p>{currentProject.detail}</p>
-                            <div className="project-outcome">
-                                <span>What changed</span>
-                                <strong>{currentProject.outcome}</strong>
-                            </div>
-                            <div className="project-tags">
-                                {currentProject.tags.map((tag) => (
-                                    <span key={tag}>{tag}</span>
-                                ))}
-                            </div>
-                            <Link
-                                className="button button-panel"
-                                href={currentProject.href}
-                                target={currentProject.href.startsWith('http') ? '_blank' : undefined}
-                                rel="noreferrer"
-                            >
-                                {currentProject.link} <ArrowUpRight size={16} />
-                            </Link>
-                        </div>
-                        <div className="project-panel-visual">
-                            <ProjectVisual project={currentProject} />
-                        </div>
-                    </motion.article>
-                </div>
-            </section>
-
-            <section className="practice-section" id="principles">
-                <div className="practice-heading">
-                    <h2>
-                        built for <em>change.</em>
-                    </h2>
-                    <p>
-                        The feature is only the beginning. The real craft is in making the system legible to its next
-                        maintainer, its operator, and the person who has never seen the code before.
-                    </p>
-                </div>
-                <div className="capability-grid">
-                    {capabilities.map((capability) => (
-                        <RevealOnScroll className="capability-card" key={capability.number}>
-                            <h3>{capability.title}</h3>
-                            <p>{capability.copy}</p>
-                        </RevealOnScroll>
-                    ))}
-                </div>
-                <div className="practice-footnote">
-                    <span>
-                        <ShieldCheck size={16} /> reliable by default
-                    </span>
-                    <span>
-                        <Workflow size={16} /> designed for change
-                    </span>
-                    <span>
-                        <Layers3 size={16} /> systems over symptoms
-                    </span>
-                </div>
-            </section>
-
-            <section className="routes-section" aria-label="Explore more">
-                <Link href="/blog" className="route-card route-card-blue" transitionTypes={['nav-forward']}>
-                    <span className="route-icon">
-                        <Terminal size={20} />
-                    </span>
-                    <small>Field notes from the workbench</small>
-                    <strong>read the notes.</strong>
-                    <ArrowUpRight />
-                </Link>
-                <Link href="/docs" className="route-card route-card-lime" transitionTypes={['nav-forward']}>
-                    <span className="route-icon">
-                        <Database size={20} />
-                    </span>
-                    <small>APIs, setup, and decisions</small>
-                    <strong>project docs.</strong>
-                    <ArrowUpRight />
-                </Link>
-            </section>
-
-            <section className="contact-section" id="hello">
-                <div className="contact-content">
-                    <div>
-                        <h2>
-                            Have a problem
-                            <br />
-                            <em>worth solving?</em>
-                        </h2>
-                        <p>
-                            Tell me what is breaking, what is growing, or what should exist next. I am usually most
-                            useful somewhere in the middle of it.
-                        </p>
-                    </div>
-                    <motion.button
-                        type="button"
-                        className={`contact-button ${copied ? 'is-copied' : ''}`}
-                        onClick={copyEmail}
-                        whileHover={prefersReducedMotion ? undefined : { y: -4 }}
-                        whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
-                    >
-                        <Mail className="text-white" size={31} />
-                        <span className="text-white">{copied ? 'Copied' : 'Start a conversation'}</span>
-                    </motion.button>
-                </div>
-            </section>
-
-            <footer className="footer">
-                <div className="footer-topline">
-                    <span>ArikSquad / MikArt Europe</span>
-                    <span>Finland / Europe</span>
-                </div>
-                <div className="footer-main">
-                    <div className="footer-title">
-                        <h2>
-                            make useful
-                            <br />
-                            <em>things.</em>
-                        </h2>
-                    </div>
-                    <div className="footer-nav">
-                        <small>Navigate</small>
-                        <Link href="#work">Work</Link>
-                        <Link href="#about">About</Link>
-                        <Link href="/blog" transitionTypes={['nav-forward']}>
-                            Notes
-                        </Link>
-                        <Link href="/docs" transitionTypes={['nav-forward']}>
-                            Docs
-                        </Link>
-                    </div>
-                </div>
-                <div className="footer-socials">
-                    {socials.map((social) => (
-                        <Link
-                            key={social.label}
-                            href={social.href}
-                            target={social.href.startsWith('http') ? '_blank' : undefined}
+                            github
+                        </a>
+                        <a className={secondaryLink} href="https://x.com/ArikSquad" target="_blank" rel="noreferrer">
+                            x
+                        </a>
+                        <a
+                            className={secondaryLink}
+                            href="https://bsky.app/profile/ariksquad.mikart.eu"
+                            target="_blank"
                             rel="noreferrer"
                         >
-                            <social.icon />
-                            <span>{social.label}</span>
-                            <ArrowUpRight size={14} />
+                            bluesky
+                        </a>
+                        <Link className={secondaryLink} href="/flow/discord">
+                            dc
                         </Link>
-                    ))}
-                </div>
-                <div className="footer-bottom">
-                    <span>© {currentYear ?? ''} ArikSquad / MikArt Europe</span>
-                    <span>Finland / {time}</span>
-                    <a href="#top">Back to top ↑</a>
-                </div>
-            </footer>
+                    </nav>
+                </section>
 
-            {copied && (
-                <motion.div className="copy-toast" initial={{ y: 22, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-                    <Check size={15} /> Email copied
-                </motion.div>
-            )}
+                <footer className="mt-auto flex items-baseline justify-between gap-7 pt-[clamp(4.75rem,12vh,8.5rem)] text-xs leading-[1.4] text-[#97938c] max-[620px]:flex-col max-[620px]:items-start max-[620px]:gap-6">
+                    <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+                        <span>ArikSquad / MikArt Europe</span>
+                        <a
+                            className={secondaryLink}
+                            href="https://github.com/ArikSquad/mikart-website"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            view source
+                        </a>
+                        <a className={secondaryLink} href="#top">
+                            top ↑
+                        </a>
+                    </div>
+                    <span>
+                        <Heart />
+                    </span>
+                </footer>
+            </div>
         </main>
-    )
-}
-
-function ProjectVisual({ project }: { project: ProjectData }) {
-    if (project.visual === 'image' && project.image) {
-        return (
-            <div className="visual-image">
-                <Image
-                    src={project.image}
-                    alt={`${project.name} product preview`}
-                    fill
-                    sizes="(max-width: 850px) 94vw, 56vw"
-                />
-            </div>
-        )
-    }
-    if (project.visual === 'platform') return <PlatformArt />
-    if (project.visual === 'terminal') return <TerminalArt />
-    return <TavaArt />
-}
-
-function TavaArt() {
-    return (
-        <div className="tava-visual">
-            <div className="tava-window">
-                <div className="window-bar">
-                    <span />
-                    <span />
-                    <span />
-                    <small>Repository.java</small>
-                </div>
-                <pre>
-                    <b>record</b> User(<i>UUID</i> id, <i>String</i> name) {'{}'}
-                    {'\n\n'}
-                    <b>var</b> users = tava.table(User.class);{'\n'}
-                    users.find(where(User::id).is(userId));
-                </pre>
-            </div>
-            <div className="tava-flow">
-                <span>
-                    <Braces size={14} /> Model
-                </span>
-                <i>→</i>
-                <span>
-                    <GitBranch size={14} /> Adapter
-                </span>
-                <i>→</i>
-                <span>
-                    <Database size={14} /> Data
-                </span>
-            </div>
-            <div className="tava-stamp">
-                <strong>One model.</strong>
-                <small>Honest capabilities.</small>
-            </div>
-        </div>
-    )
-}
-
-function PlatformArt() {
-    return (
-        <div className="platform-visual" role="img" aria-label="Shared platform layers">
-            <div className="platform-index">02</div>
-            <div className="platform-caption">one core / separate modes</div>
-            <div className="platform-stack" aria-hidden="true">
-                <div>
-                    <span>world</span>
-                    <i />
-                </div>
-                <div>
-                    <span>game modes</span>
-                    <i />
-                </div>
-                <div>
-                    <span>shared systems</span>
-                    <i />
-                </div>
-            </div>
-        </div>
-    )
-}
-
-function TerminalArt() {
-    return (
-        <div className="terminal-visual">
-            <div className="terminal-top">
-                <span>runtime / secure</span>
-                <i />
-            </div>
-            <div className="terminal-lines">
-                <p>
-                    <b>01</b> checking boundary <strong>ok</strong>
-                </p>
-                <p>
-                    <b>02</b> loading policy engine <strong>ok</strong>
-                </p>
-                <p>
-                    <b>03</b> opening operator surface <strong>ok</strong>
-                </p>
-            </div>
-            <div className="terminal-big">
-                SHIP
-                <br />
-                <em>THE FIX</em>
-            </div>
-            <Terminal className="terminal-icon" />
-        </div>
     )
 }

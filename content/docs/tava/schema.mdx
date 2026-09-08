@@ -39,12 +39,12 @@ Schema schema = Schema.builder()
 
 ### Names
 
-| Source | Result |
-| --- | --- |
-| `@Entity("invoices")` | Entity name is `invoices` |
-| no `@Entity` value | Entity name is the decapitalized record name |
-| `@Field("email_address")` | Field name is `email_address` |
-| no `@Field` value | Field name is the record component name |
+| Source                    | Result                                       |
+| ------------------------- | -------------------------------------------- |
+| `@Entity("invoices")`     | Entity name is `invoices`                    |
+| no `@Entity` value        | Entity name is the decapitalized record name |
+| `@Field("email_address")` | Field name is `email_address`                |
+| no `@Field` value         | Field name is the record component name      |
 
 ### Nullability
 
@@ -65,24 +65,24 @@ record Profile(
 Tava maps Java types to canonical logical types before an adapter maps them to
 native storage.
 
-| Java type | Logical type |
-| --- | --- |
-| `String` with `@Field(length = ...)` | `STRING` |
-| `String` without a length | `TEXT` |
-| `int`, `Integer`, `short`, `Short` | `INT32` |
-| `long`, `Long` | `INT64` |
-| `boolean`, `Boolean` | `BOOLEAN` |
-| `UUID` | `UUID` |
-| `Instant`, `OffsetDateTime` | `INSTANT` |
-| `LocalDate` | `LOCAL_DATE` |
-| `LocalDateTime` | `LOCAL_DATE_TIME` |
-| `byte[]` | `BINARY` |
-| `BigDecimal` with precision and scale | `DECIMAL` |
-| `Map` or `Collection` | `JSON` |
+| Java type                             | Logical type      |
+| ------------------------------------- | ----------------- |
+| `String` with `@Field(length = ...)`  | `STRING`          |
+| `String` without a length             | `TEXT`            |
+| `int`, `Integer`, `short`, `Short`    | `INT32`           |
+| `long`, `Long`                        | `INT64`           |
+| `boolean`, `Boolean`                  | `BOOLEAN`         |
+| `UUID`                                | `UUID`            |
+| `Instant`, `OffsetDateTime`           | `INSTANT`         |
+| `LocalDate`                           | `LOCAL_DATE`      |
+| `LocalDateTime`                       | `LOCAL_DATE_TIME` |
+| `byte[]`                              | `BINARY`          |
+| `BigDecimal` with precision and scale | `DECIMAL`         |
+| `Map` or `Collection`                 | `JSON`            |
 
 <Callout type="warn" title="BigDecimal needs a shape">
-`BigDecimal` fields must declare `@Field(precision = ..., scale = ...)` so adapters
-can create deterministic native columns.
+    `BigDecimal` fields must declare `@Field(precision = ..., scale = ...)` so adapters can create deterministic native
+    columns.
 </Callout>
 
 ## Generated Values
@@ -101,12 +101,12 @@ record Session(
 
 Supported values are:
 
-| Value | Meaning |
-| --- | --- |
-| `NONE` | The application provides the value |
-| `IDENTITY` | The backend generates an identity value when supported |
-| `UUID` | Tava generates a UUID for null typed-record fields |
-| `NOW` | The backend stores the current timestamp when supported |
+| Value      | Meaning                                                 |
+| ---------- | ------------------------------------------------------- |
+| `NONE`     | The application provides the value                      |
+| `IDENTITY` | The backend generates an identity value when supported  |
+| `UUID`     | Tava generates a UUID for null typed-record fields      |
+| `NOW`      | The backend stores the current timestamp when supported |
 
 ## Fluent Builder
 
@@ -145,18 +145,18 @@ record Event(
 
 Typed annotations are available for common overrides:
 
-| Module | Annotation |
-| --- | --- |
-| `tava-postgres` | `@PostgresType("JSONB")` |
-| `tava-mysql` | `@MySqlType("JSON")` |
-| `tava-sqlite` | `@SqliteType("TEXT")` |
-| `tava-h2` | `@H2Type("JSON")` |
+| Module           | Annotation                        |
+| ---------------- | --------------------------------- |
+| `tava-postgres`  | `@PostgresType("JSONB")`          |
+| `tava-mysql`     | `@MySqlType("JSON")`              |
+| `tava-sqlite`    | `@SqliteType("TEXT")`             |
+| `tava-h2`        | `@H2Type("JSON")`                 |
 | `tava-sqlserver` | `@SqlServerType("NVARCHAR(MAX)")` |
-| `tava-oracle` | `@OracleType("CLOB")` |
-| `tava-mongodb` | `@MongoSetting("...")` |
-| `tava-dynamodb` | `@DynamoPartitionKey` |
+| `tava-oracle`    | `@OracleType("CLOB")`             |
+| `tava-mongodb`   | `@MongoSetting("...")`            |
+| `tava-dynamodb`  | `@DynamoPartitionKey`             |
 
 <Callout type="idea" title="Portable first, native when needed">
-Use logical types for the model everyone shares. Add adapter settings only for the
-places where the backend storage choice matters.
+    Use logical types for the model everyone shares. Add adapter settings only for the places where the backend storage
+    choice matters.
 </Callout>
