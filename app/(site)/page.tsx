@@ -40,8 +40,9 @@ const discordComponentEmbed = JSON.stringify({
 })
 
 export const metadata: Metadata = {
-    title: 'MikArt Europe',
-    description: 'A project cluster led by the Finnish software ArikSquad building something cool.',
+    title: 'ArikSquad — Software & security engineer',
+    description:
+        'Software engineer in Finland building secure systems, reliable Java infrastructure, web products, and game technology.',
     openGraph: {
         title: 'MikArt Europe',
         description: 'A project cluster led by the Finnish software ArikSquad building something cool.',
