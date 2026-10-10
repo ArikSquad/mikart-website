@@ -3,21 +3,35 @@
 import { useEffect, useMemo, useState, type KeyboardEvent } from 'react'
 import { Plate, useEditorRef, usePlateEditor } from 'platejs/react'
 import {
+    AudioLines,
     Bold,
     Code,
     FileText,
+    Film,
     Globe,
     Heading1,
     Heading2,
     Heading3,
+    Heading4,
+    Heading5,
+    Heading6,
     Highlighter,
+    Image as ImageIcon,
+    Indent,
     Italic,
+    Keyboard,
     Loader2,
+    Outdent,
+    Paperclip,
+    Pilcrow,
     Plus,
     Quote,
     Redo2,
     Save,
+    SeparatorHorizontal,
     Strikethrough,
+    Subscript,
+    Superscript,
     Tag,
     Underline,
     Undo2,
@@ -31,6 +45,7 @@ import {
     NumberedListToolbarButton,
     TodoListToolbarButton
 } from '@/components/ui/list-toolbar-button'
+import { IndentToolbarButton, OutdentToolbarButton } from '@/components/ui/indent-toolbar-button'
 import { MarkToolbarButton } from '@/components/ui/mark-toolbar-button'
 import { MediaToolbarButton } from '@/components/ui/media-toolbar-button'
 import { Toolbar, ToolbarButton, ToolbarSeparator } from '@/components/ui/toolbar'
@@ -133,24 +148,30 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
     const isFormValid = title.trim().length > 0 && slugify(slug).length > 0
 
     return (
-        <div className="flex h-[calc(100vh-12rem)] min-h-[720px] flex-col overflow-hidden rounded-lg border bg-card">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3">
+        <div className="flex h-[calc(100svh-14rem)] min-h-[680px] flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-sm">
+            <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-border/70 border-b px-4 py-3 sm:px-5">
                 <div className="flex items-center gap-3">
-                    <h2 className="text-lg font-semibold">{initialData?._id ? 'Edit Post' : 'New Post'}</h2>
                     {initialData?.isPublished ? (
-                        <Badge variant="default" className="border-green-500/20 bg-green-500/10 text-green-600">
-                            <Globe className="mr-1 h-3 w-3" />
+                        <Badge
+                            variant="outline"
+                            className="border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                        >
+                            <Globe className="size-3" aria-hidden="true" />
                             Published
                         </Badge>
                     ) : initialData?._id ? (
-                        <Badge variant="secondary">
-                            <FileText className="mr-1 h-3 w-3" />
+                        <Badge variant="secondary" className="rounded-md">
+                            <FileText className="size-3" aria-hidden="true" />
                             Draft
                         </Badge>
-                    ) : null}
+                    ) : (
+                        <Badge variant="secondary" className="rounded-md">
+                            Draft
+                        </Badge>
+                    )}
                 </div>
-                <div className="flex flex-wrap items-center gap-2">
-                    <Button variant="ghost" size="sm" onClick={onCancel}>
+                <div className="flex w-full items-center justify-end gap-2 sm:w-auto">
+                    <Button variant="ghost" size="sm" onClick={onCancel} disabled={isSaving}>
                         Cancel
                     </Button>
                     <Button
@@ -160,122 +181,155 @@ export function PostEditor({ initialData, onSave, onCancel }: PostEditorProps) {
                         disabled={isSaving || !isFormValid}
                     >
                         {isSaving && saveAction === 'draft' ? (
-                            <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
                         ) : (
-                            <Save className="mr-1.5 h-4 w-4" />
+                            <Save className="size-4" aria-hidden="true" />
                         )}
-                        Save Draft
+                        Save draft
                     </Button>
                     <Button
                         size="sm"
                         onClick={() => handleSave(true)}
                         disabled={isSaving || !isFormValid}
-                        className="bg-green-600 hover:bg-green-700"
+                        className="bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600"
                     >
                         {isSaving && saveAction === 'publish' ? (
-                            <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
                         ) : (
-                            <Globe className="mr-1.5 h-4 w-4" />
+                            <Globe className="size-4" aria-hidden="true" />
                         )}
                         Publish
                     </Button>
                 </div>
             </div>
 
-            <div className="grid min-h-0 flex-1 grid-cols-1 overflow-hidden lg:grid-cols-[minmax(0,1fr)_18rem]">
-                <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden border-r">
-                    <div className="space-y-3 border-b p-4">
-                        <Input
-                            placeholder="Post title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="h-11 w-full text-lg font-medium"
-                        />
-                        <Input
-                            placeholder="Lead paragraph"
-                            value={desc}
-                            onChange={(e) => setDesc(e.target.value)}
-                            className="w-full"
-                        />
-                    </div>
-
-                    <div className="min-h-0 flex-1 overflow-hidden bg-background">
-                        <Plate editor={editor} onValueChange={({ value }) => setContent(value as any)}>
-                            <PostToolbar />
-                            <EditorContainer className="h-[calc(100%-41px)]">
-                                <Editor
-                                    variant="none"
-                                    placeholder="Write your post..."
-                                    className="min-h-full max-w-none px-6 py-5 prose prose-sm dark:prose-invert"
-                                />
-                            </EditorContainer>
-                        </Plate>
-                    </div>
+            <div className="shrink-0 space-y-2 border-border/70 border-b bg-background p-4 sm:p-5">
+                <div className="mx-auto w-full max-w-[1120px]">
+                    <Input
+                        aria-label="Post title"
+                        placeholder="Untitled post"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                        className="h-12 border-transparent bg-transparent px-0 text-2xl font-semibold tracking-tight shadow-none placeholder:text-muted-foreground/50 focus-visible:border-transparent focus-visible:ring-0 sm:text-3xl"
+                    />
+                    <Input
+                        aria-label="Post description"
+                        placeholder="Add a short description or lead paragraph"
+                        value={desc}
+                        onChange={(event) => setDesc(event.target.value)}
+                        className="h-8 border-transparent bg-transparent px-0 text-muted-foreground text-sm shadow-none placeholder:text-muted-foreground/60 focus-visible:border-transparent focus-visible:ring-0"
+                    />
                 </div>
+            </div>
 
-                <aside className="min-h-0 space-y-5 overflow-y-auto bg-muted/20 p-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="slug" className="flex items-center gap-2 text-sm font-medium">
-                            URL Slug
-                        </Label>
-                        <Input
-                            id="slug"
-                            placeholder="post-slug"
-                            value={slug}
-                            onChange={(e) => setSlug(slugify(e.target.value))}
-                            className="font-mono text-sm"
-                        />
-                        <p className="text-xs text-muted-foreground">/blog/{slug || 'your-post-slug'}</p>
+            <div className="flex min-h-0 flex-1 flex-col">
+                <Plate editor={editor} onValueChange={({ value }) => setContent(value as any)}>
+                    <div className="shrink-0 border-border/70 border-b bg-muted/20 px-3 py-2 sm:px-4">
+                        <PostToolbar />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="tags" className="flex items-center gap-2 text-sm font-medium">
-                            <Tag className="h-4 w-4 text-muted-foreground" />
-                            Tags
-                        </Label>
-                        <div className="flex gap-2">
-                            <Input
-                                id="tags"
-                                placeholder="Add tag..."
-                                value={tagInput}
-                                onChange={(e) => setTagInput(e.target.value)}
-                                onKeyDown={handleTagKeyDown}
-                                className="text-sm"
-                            />
-                            <Button type="button" variant="outline" size="icon" onClick={handleAddTag}>
-                                <Plus className="h-4 w-4" />
-                            </Button>
+                    <div className="grid min-h-0 flex-1 overflow-hidden lg:grid-cols-[minmax(0,1fr)_19rem] max-lg:overflow-y-auto">
+                        <div className="min-h-[520px] min-w-0 overflow-y-auto bg-muted/20 p-4 sm:p-8 max-lg:overflow-visible">
+                            <div className="mx-auto min-h-full w-full max-w-4xl overflow-hidden rounded-lg border border-border/70 bg-background shadow-sm">
+                                <EditorContainer className="h-auto min-h-full overflow-visible">
+                                    <Editor
+                                        variant="none"
+                                        placeholder="Start writing your post..."
+                                        className="min-h-[540px] max-w-none px-6 py-10 text-base leading-7 prose prose-sm dark:prose-invert sm:px-12"
+                                    />
+                                </EditorContainer>
+                            </div>
                         </div>
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                            {tags.map((tag) => (
-                                <Badge key={tag} variant="secondary" className="gap-1 pr-1 text-xs">
-                                    {tag}
-                                    <button
-                                        type="button"
-                                        onClick={() => setTags(tags.filter((item) => item !== tag))}
-                                        className="rounded-full p-0.5 hover:bg-destructive/10 hover:text-destructive"
-                                    >
-                                        <X className="h-3 w-3" />
-                                    </button>
-                                </Badge>
-                            ))}
-                        </div>
-                    </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="followupUrl" className="text-sm text-muted-foreground">
-                            Followup URL
-                        </Label>
-                        <Input
-                            id="followupUrl"
-                            placeholder="https://..."
-                            value={followupUrl}
-                            onChange={(e) => setFollowupUrl(e.target.value)}
-                            className="text-sm"
-                        />
-                        <p className="text-xs text-muted-foreground">Link to a related post or update</p>
+                        <aside className="min-h-0 overflow-y-auto border-border/70 border-l bg-background p-4 sm:p-5 max-lg:border-t max-lg:border-l-0">
+                            <div className="space-y-6">
+                                <section>
+                                    <h2 className="font-semibold text-sm">Post details</h2>
+                                    <p className="mt-1.5 text-muted-foreground text-xs leading-5">
+                                        Set the URL, tags, and related links for this post.
+                                    </p>
+                                </section>
+
+                                <section className="space-y-2">
+                                    <Label htmlFor="slug" className="text-sm font-medium">
+                                        URL slug
+                                    </Label>
+                                    <Input
+                                        id="slug"
+                                        placeholder="post-slug"
+                                        value={slug}
+                                        onChange={(event) => setSlug(slugify(event.target.value))}
+                                        className="font-mono text-sm"
+                                    />
+                                    <p className="break-all font-mono text-muted-foreground text-[11px]">
+                                        /blog/{slug || 'your-post-slug'}
+                                    </p>
+                                </section>
+
+                                <section className="space-y-2">
+                                    <Label htmlFor="tags" className="flex items-center gap-2 text-sm font-medium">
+                                        <Tag className="size-3.5 text-muted-foreground" aria-hidden="true" />
+                                        Tags
+                                    </Label>
+                                    <div className="flex gap-2">
+                                        <Input
+                                            id="tags"
+                                            placeholder="Add tag"
+                                            value={tagInput}
+                                            onChange={(event) => setTagInput(event.target.value)}
+                                            onKeyDown={handleTagKeyDown}
+                                            className="text-sm"
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            size="icon"
+                                            onClick={handleAddTag}
+                                            aria-label="Add tag"
+                                        >
+                                            <Plus className="size-4" aria-hidden="true" />
+                                        </Button>
+                                    </div>
+                                    <div className="flex flex-wrap gap-1.5 pt-1">
+                                        {tags.map((tag) => (
+                                            <Badge
+                                                key={tag}
+                                                variant="secondary"
+                                                className="gap-1 rounded-md pr-1 text-xs"
+                                            >
+                                                {tag}
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setTags(tags.filter((item) => item !== tag))}
+                                                    className="rounded-full p-0.5 hover:bg-destructive/10 hover:text-destructive"
+                                                    aria-label={`Remove ${tag} tag`}
+                                                >
+                                                    <X className="size-3" aria-hidden="true" />
+                                                </button>
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                <section className="space-y-2">
+                                    <Label htmlFor="followupUrl" className="text-sm font-medium">
+                                        Follow-up URL
+                                    </Label>
+                                    <Input
+                                        id="followupUrl"
+                                        placeholder="https://..."
+                                        value={followupUrl}
+                                        onChange={(event) => setFollowupUrl(event.target.value)}
+                                        className="text-sm"
+                                    />
+                                    <p className="text-muted-foreground text-xs leading-5">
+                                        Optional link to a related post or update.
+                                    </p>
+                                </section>
+                            </div>
+                        </aside>
                     </div>
-                </aside>
+                </Plate>
             </div>
         </div>
     )
@@ -289,51 +343,107 @@ function PostToolbar() {
         editor.tf.focus()
     }
 
+    const insertHorizontalRule = () => {
+        editor.tf.setNodes({ type: KEYS.hr })
+        editor.tf.insertNodes({
+            children: [{ text: '' }],
+            type: KEYS.p
+        })
+        editor.tf.focus()
+    }
+
     return (
-        <Toolbar className="h-10 shrink-0 gap-1 overflow-x-auto border-b bg-muted/30 px-2">
-            <ToolbarButton tooltip="Undo" onClick={() => editor.tf.undo()}>
+        <Toolbar
+            aria-label="Formatting toolbar"
+            className="flex min-h-9 w-full flex-wrap items-center gap-0.5 overflow-x-auto rounded-md border border-border/70 bg-background p-1.5 shadow-xs"
+        >
+            <ToolbarButton type="button" tooltip="Undo" aria-label="Undo" onClick={() => editor.tf.undo()}>
                 <Undo2 />
             </ToolbarButton>
-            <ToolbarButton tooltip="Redo" onClick={() => editor.tf.redo()}>
+            <ToolbarButton type="button" tooltip="Redo" aria-label="Redo" onClick={() => editor.tf.redo()}>
                 <Redo2 />
             </ToolbarButton>
             <ToolbarSeparator />
-            <ToolbarButton tooltip="Heading 1" onClick={() => toggleBlock('h1')}>
+
+            <ToolbarButton type="button" tooltip="Paragraph" aria-label="Paragraph" onClick={() => toggleBlock(KEYS.p)}>
+                <Pilcrow />
+            </ToolbarButton>
+            <ToolbarButton type="button" tooltip="Heading 1" aria-label="Heading 1" onClick={() => toggleBlock('h1')}>
                 <Heading1 />
             </ToolbarButton>
-            <ToolbarButton tooltip="Heading 2" onClick={() => toggleBlock('h2')}>
+            <ToolbarButton type="button" tooltip="Heading 2" aria-label="Heading 2" onClick={() => toggleBlock('h2')}>
                 <Heading2 />
             </ToolbarButton>
-            <ToolbarButton tooltip="Heading 3" onClick={() => toggleBlock('h3')}>
+            <ToolbarButton type="button" tooltip="Heading 3" aria-label="Heading 3" onClick={() => toggleBlock('h3')}>
                 <Heading3 />
             </ToolbarButton>
-            <ToolbarButton tooltip="Quote" onClick={() => toggleBlock('blockquote')}>
+            <ToolbarButton type="button" tooltip="Heading 4" aria-label="Heading 4" onClick={() => toggleBlock('h4')}>
+                <Heading4 />
+            </ToolbarButton>
+            <ToolbarButton type="button" tooltip="Heading 5" aria-label="Heading 5" onClick={() => toggleBlock('h5')}>
+                <Heading5 />
+            </ToolbarButton>
+            <ToolbarButton type="button" tooltip="Heading 6" aria-label="Heading 6" onClick={() => toggleBlock('h6')}>
+                <Heading6 />
+            </ToolbarButton>
+            <ToolbarButton
+                type="button"
+                tooltip="Blockquote"
+                aria-label="Blockquote"
+                onClick={() => toggleBlock(KEYS.blockquote)}
+            >
                 <Quote />
             </ToolbarButton>
+            <ToolbarButton
+                type="button"
+                tooltip="Horizontal rule"
+                aria-label="Horizontal rule"
+                onClick={insertHorizontalRule}
+            >
+                <SeparatorHorizontal />
+            </ToolbarButton>
+
+            <ToolbarSeparator />
             <BulletedListToolbarButton />
             <NumberedListToolbarButton />
-            <TodoListToolbarButton />
+            <TodoListToolbarButton aria-label="Todo list" />
+            <OutdentToolbarButton aria-label="Outdent" />
+            <IndentToolbarButton aria-label="Indent" />
+
             <ToolbarSeparator />
-            <MarkToolbarButton nodeType="bold" tooltip="Bold">
+            <MarkToolbarButton nodeType="bold" tooltip="Bold" aria-label="Bold">
                 <Bold />
             </MarkToolbarButton>
-            <MarkToolbarButton nodeType="italic" tooltip="Italic">
+            <MarkToolbarButton nodeType="italic" tooltip="Italic" aria-label="Italic">
                 <Italic />
             </MarkToolbarButton>
-            <MarkToolbarButton nodeType="underline" tooltip="Underline">
+            <MarkToolbarButton nodeType="underline" tooltip="Underline" aria-label="Underline">
                 <Underline />
             </MarkToolbarButton>
-            <MarkToolbarButton nodeType="strikethrough" tooltip="Strikethrough">
+            <MarkToolbarButton nodeType="strikethrough" tooltip="Strikethrough" aria-label="Strikethrough">
                 <Strikethrough />
             </MarkToolbarButton>
-            <MarkToolbarButton nodeType="code" tooltip="Code">
+            <MarkToolbarButton nodeType="code" tooltip="Inline code" aria-label="Inline code">
                 <Code />
             </MarkToolbarButton>
-            <MarkToolbarButton nodeType="highlight" tooltip="Highlight">
+            <MarkToolbarButton nodeType="highlight" tooltip="Highlight" aria-label="Highlight">
                 <Highlighter />
             </MarkToolbarButton>
+            <MarkToolbarButton nodeType="subscript" tooltip="Subscript" aria-label="Subscript">
+                <Subscript />
+            </MarkToolbarButton>
+            <MarkToolbarButton nodeType="superscript" tooltip="Superscript" aria-label="Superscript">
+                <Superscript />
+            </MarkToolbarButton>
+            <MarkToolbarButton nodeType="kbd" tooltip="Keyboard input" aria-label="Keyboard input">
+                <Keyboard />
+            </MarkToolbarButton>
+
             <ToolbarSeparator />
             <MediaToolbarButton nodeType={KEYS.img} />
+            <MediaToolbarButton nodeType={KEYS.video} />
+            <MediaToolbarButton nodeType={KEYS.audio} />
+            <MediaToolbarButton nodeType={KEYS.file} />
         </Toolbar>
     )
 }

@@ -96,6 +96,8 @@ export function MediaToolbarButton({ nodeType, ...props }: DropdownMenuProps & {
     return (
         <>
             <ToolbarSplitButton
+                tooltip={currentConfig.tooltip}
+                aria-label={currentConfig.tooltip}
                 onClick={() => {
                     openFilePicker()
                 }}
