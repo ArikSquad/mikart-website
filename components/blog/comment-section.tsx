@@ -13,7 +13,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import {
-    MessageCircle,
     Reply,
     ChevronDown,
     ChevronUp,
@@ -113,17 +112,11 @@ export function CommentSection({ postId, comments }: CommentSectionProps) {
     }
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b">
-                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10">
-                    <MessageCircle className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                    <h3 className="text-lg font-semibold">Discussion</h3>
-                    <p className="text-sm text-muted-foreground">
-                        {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
-                    </p>
-                </div>
+        <div className="blog-discussion">
+            <div className="blog-discussion-heading">
+                <h2>
+                    Discussion <span>{comments.length}</span>
+                </h2>
             </div>
 
             {isSignedIn ? (
@@ -156,33 +149,27 @@ export function CommentSection({ postId, comments }: CommentSectionProps) {
                                 ) : (
                                     <Send className="h-4 w-4" />
                                 )}
-                                Post Comment
+                                Post comment
                             </Button>
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center py-8 px-4 rounded-xl border-2 border-dashed bg-muted/20">
-                    <MessageCircle className="h-8 w-8 text-muted-foreground mb-3" />
-                    <p className="text-muted-foreground mb-3 text-center">Sign in to join the conversation</p>
+                <div className="blog-signin">
+                    <p>Have something to add?</p>
                     <SignInButton mode="modal">
-                        <Button variant="default" size="sm">
-                            Sign In
-                        </Button>
+                        <button type="button" className="blog-signin-link">
+                            Sign in to join the discussion <span aria-hidden="true">→</span>
+                        </button>
                     </SignInButton>
                 </div>
             )}
 
-            <div className="space-y-6 pt-2">
+            <div className="blog-comment-list">
                 {comments.map((comment) => (
                     <CommentItem key={comment._id} comment={comment} isAdmin={isAdmin} currentUserId={user?.id} />
                 ))}
-                {comments.length === 0 && (
-                    <div className="text-center py-12">
-                        <MessageCircle className="h-12 w-12 mx-auto text-muted-foreground/30 mb-4" />
-                        <p className="text-muted-foreground">No comments yet. Be the first to share your thoughts!</p>
-                    </div>
-                )}
+                {comments.length === 0 && <p className="blog-discussion-empty">No comments yet.</p>}
             </div>
         </div>
     )
@@ -286,7 +273,7 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
     }
 
     return (
-        <div className="group">
+        <div className="blog-comment group">
             <div className="flex gap-4">
                 <Link href={`/profile/${comment.userId}`}>
                     <Avatar className="h-10 w-10 ring-2 ring-background shadow-sm shrink-0 hover:ring-primary/20 transition-all cursor-pointer">
@@ -308,7 +295,14 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                             <span className="text-xs text-muted-foreground">
                                 {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                             </span>
-                            {wasEdited && <span className="text-xs text-muted-foreground italic">(edited)</span>}
+                            {wasEdited && (
+                                <span
+                                    className="blog-edited"
+                                    title={`Edited ${new Date(comment.updatedAt).toLocaleDateString()}`}
+                                >
+                                    Edited
+                                </span>
+                            )}
                         </div>
                         {canModify && !isEditing && (
                             <DropdownMenu>
@@ -316,12 +310,12 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        className="h-8 w-8 opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                                     >
                                         <MoreHorizontal className="h-4 w-4" />
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
+                                <DropdownMenuContent align="end" className="blog-theme">
                                     {isOwner && (
                                         <DropdownMenuItem
                                             onClick={() => {
@@ -424,7 +418,7 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
                                             <SmilePlus className="h-4 w-4" />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-2" align="start">
+                                    <PopoverContent className="blog-theme w-auto p-2" align="start">
                                         <div className="flex gap-1">
                                             {AVAILABLE_EMOJIS.map((emoji) => (
                                                 <Button
@@ -530,7 +524,7 @@ function CommentItem({ comment, isAdmin, currentUserId }: CommentItemProps) {
             </div>
 
             <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-                <AlertDialogContent>
+                <AlertDialogContent className="blog-theme">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Delete comment?</AlertDialogTitle>
                         <AlertDialogDescription>
@@ -648,7 +642,14 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
                         <span className="text-xs text-muted-foreground">
                             {formatDistanceToNow(new Date(reply.createdAt), { addSuffix: true })}
                         </span>
-                        {wasEdited && <span className="text-xs text-muted-foreground italic">(edited)</span>}
+                        {wasEdited && (
+                            <span
+                                className="blog-edited"
+                                title={`Edited ${new Date(reply.updatedAt).toLocaleDateString()}`}
+                            >
+                                Edited
+                            </span>
+                        )}
                     </div>
                     {canModify && !isEditing && (
                         <DropdownMenu>
@@ -656,12 +657,12 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    className="h-7 w-7 opacity-70 hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                                 >
                                     <MoreHorizontal className="h-3.5 w-3.5" />
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent align="end" className="blog-theme">
                                 {isOwner && (
                                     <DropdownMenuItem
                                         onClick={() => {
@@ -756,7 +757,7 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
                                             <SmilePlus className="h-3.5 w-3.5" />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-2" align="start">
+                                    <PopoverContent className="blog-theme w-auto p-2" align="start">
                                         <div className="flex gap-1">
                                             {AVAILABLE_EMOJIS.map((emoji) => (
                                                 <Button
@@ -779,7 +780,7 @@ function ReplyItem({ reply, isAdmin, currentUserId }: ReplyItemProps) {
             </div>
 
             <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-                <AlertDialogContent>
+                <AlertDialogContent className="blog-theme">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Delete reply?</AlertDialogTitle>
                         <AlertDialogDescription>

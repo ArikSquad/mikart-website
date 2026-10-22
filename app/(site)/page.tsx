@@ -79,7 +79,7 @@ export default function Home() {
                         </a>
                     </nav>
                     <a className="header-play" href="#join">
-                        JOIN SERVER <ArrowUpRight size={17} aria-hidden="true" />
+                        Join server <ArrowUpRight size={17} aria-hidden="true" />
                     </a>
                 </div>
             </header>
@@ -88,11 +88,11 @@ export default function Home() {
                 <section className="hero" aria-labelledby="hero-title">
                     <div className="hero-copy">
                         <h1 id="hero-title">
-                            YOUR NEXT
+                            Your next
                             <br />
-                            MINECRAFT
+                            Minecraft
                             <br />
-                            <span>ADVENTURE.</span>
+                            <span>adventure.</span>
                         </h1>
                         <p className="hero-description">
                             MikArt is returning for Season 2.
@@ -128,9 +128,9 @@ export default function Home() {
                     <div className="section-heading">
                         <div>
                             <h2 id="first-look-title">
-                                TAKE A LOOK
+                                Take a look
                                 <br />
-                                AROUND.
+                                around.
                             </h2>
                         </div>
                         <p>
@@ -171,9 +171,9 @@ export default function Home() {
                     </figure>
                     <div className="world-copy">
                         <h2 id="world-title">
-                            SEASON 2
+                            Season 2
                             <br />
-                            <span>IS ON THE WAY.</span>
+                            <span>is on the way.</span>
                         </h2>
                         <p>We’re working on the relaunch. These screenshots are a look inside the current build.</p>
                         <p>Join our Discord for development updates and the launch announcement.</p>
@@ -186,9 +186,9 @@ export default function Home() {
                 <section id="join" className="join-section section-space" aria-labelledby="join-title">
                     <div>
                         <h2 id="join-title">
-                            JOIN THE
+                            Join the
                             <br />
-                            <span>SERVER.</span>
+                            <span>server.</span>
                         </h2>
                     </div>
                     <div className="join-instructions">
@@ -210,9 +210,9 @@ export default function Home() {
                     <div className="section-heading">
                         <div>
                             <h2 id="projects-title">
-                                OUR
+                                Our
                                 <br />
-                                PROJECTS.
+                                projects.
                             </h2>
                         </div>
                         <p>

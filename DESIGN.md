@@ -4,7 +4,7 @@
 
 A full-width, server-first Minecraft page. Typography, authentic server photography, and clear actions carry the design. The Essential reference informs the confidence and simplicity of the layout, not its branding or a literal copy of its typeface.
 
-The owner's latest direction supersedes the initial pixel-font and voxel-art explorations. Use clean Geist typography throughout. The hero must fill the first screen on large monitors. Its supplied forest photograph sits flush against the complete bottom-right corner, fading toward the text. It is not an image card or visible rectangular panel.
+The owner's latest direction supersedes the initial pixel-font and voxel-art explorations. Use clean Inter typography throughout, following the latest Modrinth-inspired typography update. The hero must fill the first screen on large monitors. Its supplied forest photograph sits flush against the complete bottom-right corner, fading toward the text. It is not an image card or visible rectangular panel.
 
 ## Non-negotiables from review
 
@@ -21,23 +21,23 @@ The owner's latest direction supersedes the initial pixel-font and voxel-art exp
 
 ## Typography
 
-**Geist Sans**, already loaded by the site layout, is the only home-page typeface. Heavy, tightly spaced hero text creates impact; lighter paragraphs and functional labels provide contrast. There is no additional pixel or monospace font system.
+**Inter**, self-hosted through Next.js, is the home-page typeface. Bold, sentence-case hero text creates impact; lighter paragraphs and functional labels provide contrast. There is no additional pixel or monospace font system.
 
-The hero scales from roughly 43px on narrow phones to 210px on very large screens. Its desktop line height is .94 with -.065em tracking; mobile loosens tracking and line height slightly. Secondary headings are smaller and lighter. Copy, captions, and navigation use normal sentence case where possible. Text is flat: no gradient fills, glows, extrusion, or ornamental shadows.
+The hero scales from roughly 43px on narrow phones to 190px on very large screens. Its desktop line height is 1.04 with -.055em tracking; mobile loosens tracking and line height slightly. Secondary headings are smaller and lighter. Copy, captions, and navigation use normal sentence case where possible. Text is flat: no gradient fills, glows, extrusion, or ornamental shadows.
 
 ## Color and material
 
 | Role              | Value     | Purpose                                        |
 | ----------------- | --------- | ---------------------------------------------- |
-| Canvas            | `#090e0b` | Near black, subtly related to the forest       |
-| Primary text      | `#e9eeea` | Headings and important text                    |
-| Supporting text   | `#a0aaa4` | Paragraphs and helper copy                     |
-| Accent            | `#b1e9c3` | Primary actions and selective heading emphasis |
-| Rules             | `#263029` | Functional section divisions                   |
-| Secondary surface | `#111b14` | Join section                                   |
-| Footer surface    | `#101812` | Quiet closing area                             |
+| Canvas            | `#080f1b` | Near black, subtly related to the forest       |
+| Primary text      | `#e8eef7` | Headings and important text                    |
+| Supporting text   | `#9eafc5` | Paragraphs and helper copy                     |
+| Accent            | `#9bd0ff` | Primary actions and selective heading emphasis |
+| Rules             | `#203047` | Functional section divisions                   |
+| Secondary surface | `#0f1e31` | Join section                                   |
+| Footer surface    | `#0b1626` | Quiet closing area                             |
 
-Mint is the single interface accent. Other colors come from the server screenshots. Corners are square, surfaces are opaque, and the page has no floating cards, glassmorphism, arbitrary shadows, blurred shapes, or ambient animations.
+Ice blue is the single interface accent. The latest direction uses a deep ocean-blue canvas (#080f1b) with navy surfaces and cool blue text. Other colors come from the server screenshots. Controls have subtle 10px rounding, surfaces are opaque, and the page has no floating cards, glassmorphism, arbitrary shadows, blurred shapes, or ambient animations.
 
 ## Full-screen hero and image treatment
 
@@ -89,3 +89,7 @@ Styles are scoped to the homepage. Existing authentication, other layouts, docum
 ## Next inputs
 
 Official logo, final hero artwork, actual trailer, confirmed server mechanics, and launch timing. Preserve the hierarchy when adding them. Update visible launch copy and metadata together. Do not reintroduce rejected badges, slogan labels, pixel fonts, invented logos, or generic illustrations.
+
+## Blog reading and discussion
+
+The blog uses Inter with a deep ocean-blue canvas and cool blue local theme tokens, including portalled discussion menus and dialogs. Navigation and sharing are transparent text actions, with visible focus outlines and no resting button backgrounds. Article content uses a 736px reading width, 16px body copy at 1.75 line height, 16px paragraph gaps, and 32px before subsequent headings. The first content block has no top margin. Discussion follows a compact heading, inline sign-in invitation, and separated comment rows. Edited metadata is upright and unparenthesized. Avoid the global orange primary color, dashed sign-in panels, duplicate empty states, and stacked renderer/page heading margins.
