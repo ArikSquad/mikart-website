@@ -17,7 +17,6 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
         <PageTransition>
             <DocsPage
                 toc={toc}
-                lastUpdate={lastModified ? new Date(lastModified) : undefined}
                 full={page.data.full}
                 tableOfContent={{
                     style: 'clerk'
