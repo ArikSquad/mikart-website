@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
+import { Cormorant_Garamond, Inter, Geist, Geist_Mono, JetBrains_Mono } from 'next/font/google'
 
 import '@/styles/globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -11,6 +11,8 @@ import { metadata as m } from '@/types/metadata'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-sans' })
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -44,7 +46,9 @@ export const metadata: Metadata = m
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} antialiased`}>
+            <body
+                className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${editorialSerif.variable} antialiased`}
+            >
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                     <ClerkProvider>
                         <ConvexClientProvider>

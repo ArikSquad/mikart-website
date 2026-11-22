@@ -1,35 +1,60 @@
 'use client'
 
 import Link from 'next/link'
+import { BookOpen } from 'lucide-react'
 import { useQuery } from 'convex/react'
 import type { Doc } from '@/convex/_generated/dataModel'
 import { api } from '@/convex/_generated/api'
 import { formatDate } from '@/lib/utils'
 import { BlogHeader } from './blog-header'
-import { Separator } from '@/components/ui/separator'
-import { Fragment } from 'react'
+import { normalizePlateContent } from '@/lib/plate-content'
 
-const rowClass =
-    'group block rounded-2xl px-4 py-6 transition-colors hover:bg-[#181818] focus-visible:bg-[#181818] focus-visible:outline-none sm:px-6 sm:py-7'
+function findImage(value: unknown): string | undefined {
+    if (Array.isArray(value)) {
+        for (const item of value) {
+            const image = findImage(item)
+            if (image) return image
+        }
+    } else if (value && typeof value === 'object') {
+        const node = value as Record<string, unknown>
+        if (node.type === 'img' && typeof node.url === 'string' && /^(https?:\/\/|\/(?!\/))/.test(node.url))
+            return node.url
+        return findImage(node.children) ?? findImage(node.content)
+    }
+}
 
-function PostRow({ post }: { post: Doc<'posts'> }) {
+function PostCard({ post, featured = false }: { post: Doc<'posts'>; featured?: boolean }) {
+    const image = findImage(normalizePlateContent(post.content))
     return (
-        <Link href={`/blog/${post.slug}`} className={rowClass} transitionTypes={['nav-forward']}>
+        <Link
+            href={`/blog/${post.slug}`}
+            className={`blog-card${featured ? ' blog-featured' : ''}`}
+            transitionTypes={['nav-forward']}
+        >
             <article>
-                <time className="text-[11px] text-[#77736d]" dateTime={new Date(post.createdAt).toISOString()}>
-                    {formatDate(new Date(post.createdAt).toISOString())}
-                </time>
-                <h2 className="mt-2.5 text-[clamp(1.35rem,3vw,1.8rem)] leading-[1.2] font-medium tracking-[-0.035em] transition-colors group-hover:text-white">
-                    {post.title}
-                </h2>
-                {post.description && (
-                    <p className="mt-3 max-w-170 font-sans text-[15px] leading-[1.6] tracking-normal text-[#97938c]">
-                        {post.description}
-                    </p>
-                )}
-                <span className="mt-4 inline-block text-xs text-[#77736d] transition-colors group-hover:text-[#e4e2de]">
-                    Read note <span aria-hidden="true">↗</span>
-                </span>
+                <div className={`blog-card-art${image ? '' : ' blog-card-placeholder'}`}>
+                    {image ? (
+                        // Content images are hosted by the editor's upload providers.
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={image} alt="" loading={featured ? 'eager' : 'lazy'} />
+                    ) : (
+                        <>
+                            <span className="blog-cover-wordmark" aria-hidden="true">
+                                mikart<span>journal</span>
+                            </span>
+                        </>
+                    )}
+                </div>
+                <div className="blog-card-copy">
+                    {featured && <span className="blog-eyebrow">Featured article</span>}
+                    <h2>{post.title}</h2>
+                    {post.description && <p>{post.description}</p>}
+                    <div className="blog-card-meta">
+                        <time dateTime={new Date(post.createdAt).toISOString()}>
+                            {formatDate(new Date(post.createdAt).toISOString())}
+                        </time>
+                    </div>
+                </div>
             </article>
         </Link>
     )
@@ -37,47 +62,55 @@ function PostRow({ post }: { post: Doc<'posts'> }) {
 
 export default function BlogPage() {
     const posts = useQuery(api.posts.listPublished)
-
     return (
-        <main className="min-h-svh bg-[#111111] font-mono text-sm tracking-[-0.015em] text-[#e4e2de]">
+        <div className="blog-shell">
             <BlogHeader />
-            <div className="mx-auto w-full max-w-257 px-5 sm:px-8">
-                <section className="max-w-190 pt-14 pb-20 sm:pt-24 sm:pb-28" aria-labelledby="notes-title">
-                    <h1
-                        id="notes-title"
-                        className="text-[clamp(2.5rem,7vw,4.75rem)] leading-[1.02] font-medium tracking-[-0.06em]"
-                    >
-                        blog
-                    </h1>
-                    <p className="mt-5 max-w-135 font-sans text-base leading-[1.65] tracking-normal text-[#97938c] sm:mt-7 sm:text-lg">
-                        read something I've posted here
-                    </p>
-                </section>
-
-                <section className="pb-24 sm:pb-32" aria-labelledby="posts-title">
-                    {/*loading skeleton*/}
-                    {posts === undefined ? (
-                        <div className="space-y-2" aria-busy="true" aria-label="Loading posts">
-                            {[0, 1, 2].map((item) => (
-                                <div className={`${rowClass} min-h-40 animate-pulse bg-[#171717]/60`} key={item} />
+            <main id="main">
+                <header className="blog-intro blog-container">
+                    <h1>Blog</h1>
+                </header>
+                {posts === undefined ? (
+                    <div className="blog-loading blog-container" aria-busy="true" aria-label="Loading articles">
+                        <div className="blog-skeleton blog-skeleton-featured" />
+                        <div className="blog-grid">
+                            {[0, 1, 2].map((i) => (
+                                <div className="blog-skeleton" key={i} />
                             ))}
                         </div>
-                    ) : posts.length ? (
-                        <div className="space-y-2">
-                            {posts.map((post, i) => (
-                                <Fragment key={post._id}>
-                                    <PostRow post={post} />
-                                    {i < posts.length - 1 && <Separator />}
-                                </Fragment>
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="px-4 py-10 text-[#97938c] sm:px-6">
-                            no posts are currently available, check again later.
-                        </p>
-                    )}
-                </section>
-            </div>
-        </main>
+                    </div>
+                ) : posts.length ? (
+                    <>
+                        <section className="blog-feature-section" aria-label="Featured article">
+                            <div className="blog-container">
+                                <PostCard post={posts[0]} featured />
+                            </div>
+                        </section>
+                        {posts.length > 1 && (
+                            <section className="blog-more blog-container" aria-labelledby="more-articles">
+                                <h2 id="more-articles">More articles</h2>
+                                <div className="blog-grid">
+                                    {posts.slice(1).map((post) => (
+                                        <PostCard post={post} key={post._id} />
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                    </>
+                ) : (
+                    <section className="blog-empty blog-container">
+                        <BookOpen size={32} aria-hidden="true" />
+                        <h2>A little quiet here, for now.</h2>
+                        <p>New articles are on the way. Check back soon.</p>
+                        <Link href="/">
+                            Back to MikArt <span aria-hidden="true">↗</span>
+                        </Link>
+                    </section>
+                )}
+                <footer className="blog-footer blog-container">
+                    <span>MikArt & ArikSquad</span>
+                    <Link href="https://github.com/ArikSquad">Find us on GitHub ↗</Link>
+                </footer>
+            </main>
+        </div>
     )
 }

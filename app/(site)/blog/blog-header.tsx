@@ -1,29 +1,22 @@
 import Link from 'next/link'
+import './blog.css'
 
 export function BlogHeader() {
     return (
-        <header className="bg-[#111111]" style={{ viewTransitionName: 'site-header' }}>
-            <div className="mx-auto flex h-16 w-full max-w-257 items-center justify-between gap-7 px-5 sm:h-18 sm:px-8">
-                <Link href="/" className="font-bold" transitionTypes={['nav-back']}>
-                    ari <span className="font-normal text-[#97938c]">/ blogs</span>
+        <header className="blog-header" style={{ viewTransitionName: 'site-header' }}>
+            <div className="blog-header-inner">
+                <Link href="/" className="blog-brand" transitionTypes={['nav-back']}>
+                    mikart <span>/ Blog</span>
                 </Link>
-                <nav className="flex gap-5 text-xs text-[#97938c] sm:gap-7" aria-label="Primary navigation">
-                    <Link className="transition-colors hover:text-[#e4e2de]" href="/">
-                        home
+                <nav aria-label="Primary navigation">
+                    <Link href="/">Home</Link>
+                    <Link href="/blog" aria-current="page">
+                        Blog
                     </Link>
-                    <Link
-                        className="transition-colors hover:text-[#e4e2de]"
-                        href="/docs"
-                        transitionTypes={['nav-forward']}
-                    >
-                        docs
+                    <Link href="/docs" transitionTypes={['nav-forward']}>
+                        Docs
                     </Link>
-                    <a
-                        className="transition-colors hover:text-[#e4e2de] max-[620px]:hidden"
-                        href="mailto:ariksquad@mikart.eu"
-                    >
-                        contact
-                    </a>
+                    <a href="mailto:ariksquad@mikart.eu">Contact ↗</a>
                 </nav>
             </div>
         </header>
